@@ -14,7 +14,7 @@ There are various shortcuts in the TDXMorph ecosystem. I have tried to keep them
 * <kbd>shift</kbd> + <kbd>left click</kbd> = store a preset, or overwrite the one in that slot
 * <kbd>shift</kbd> + <kbd>right click</kbd> = delete a preset
 * <kbd>shift</kbd> + <kbd>middle click</kbd> = freeze or unfreeze, which locks interaction with the elements so they cannot be nudged by accident (stored slots only)
-* <kbd>ctrl</kbd> + <kbd>left click</kbd> = jump to preset (no interpolation)
+* <kbd>ctrl</kbd> + <kbd>left click</kbd> = jump to preset (no interpolation; locked elements keep their value)
 * <kbd>ctrl</kbd> + <kbd>right click</kbd> = morph over the container's global **Morph Time** instead of the preset's stored time, meant for a quick transition check
 * <kbd>alt</kbd> + drag one slot onto another = swap which preset each button triggers (both slots must be stored; *Rename presets in order* bakes the new order into storage)
 

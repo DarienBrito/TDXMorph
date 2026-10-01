@@ -138,12 +138,12 @@ Capture the current parameter state into `name`, creating or overwriting it. `Fa
 ```python
 RenamePreset(old, new)
 ```
-Rename a preset, keeping its position, and update every scene aiming at it.
+Rename a preset, keeping its position, and update every scene aiming at it. A PresetManager Target on the old name follows it.
 
 ```python
 DeletePreset(name)
 ```
-Delete a preset, and reset every scene aiming at it to `'None'`.
+Delete a preset, and reset every scene aiming at it to `'None'`. A PresetManager Target on it falls back to the first preset.
 
 ```python
 ClearPresets()
@@ -168,12 +168,13 @@ Trigger a preset with a delay.
 ```python
 DuplicateScene(name, sourceName)
 ```
-Duplicate sourceName scene with given name.
+Copy sourceName into a new scene and return the name it got. Never overwrites: a taken name gets a
+numeric suffix. Returns `''` when sourceName does not exist.
 
 ```python
 EnableFollowActions(enable=True)
 ```
-Activate/Deactive follow actions functionality.
+Arm or disarm the follow action that runs when the current morph completes. A scene launch arms it; Stop disarms it.
 
 ```python
 EnableScripting(enable=True)
@@ -203,12 +204,12 @@ Grab available morph curves from source.
 ```python
 ImportPresetsJSON()
 ```
-Import presets including scenes from disk. 
+Import presets including scenes from disk. The presets go to the PresetManager before any scene is replaced, so a refused file changes nothing.
 
 ```python
 PerformAction(action, value=None)
 ```
-Trigger some action from the transport menu. Value is only useful for Play/Pause action.
+Trigger some action from the transport menu. Value is only useful for Play/Pause action. Play/Pause leaves a running Sequence alone; every other action ends it.
 
 ```python
 ReportResult(msg, title)
@@ -309,7 +310,7 @@ On sequence plays the whole scenes sequence, ignoring the actions column. This i
 ```python
 onStop(info)
 ```
-Execute homonimus action.
+Stop the morph, cancel launches still waiting out their Delay, disarm the pending follow action and end a running Sequence.
 
 ```python
 _updateTimeInfo(totalDuration)

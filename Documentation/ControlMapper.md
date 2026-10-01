@@ -186,7 +186,7 @@ Takeover decides what happens on the first move after a mapping goes live:
 | **Mode** | **Behaviour** |
 |---|---|
 | `jump` | Write immediately. The parameter snaps to wherever the control already sits. |
-| `pickup` | Write nothing until the incoming control crosses the parameter's current value, then take over. |
+| `pickup` | Write nothing until the incoming control crosses the parameter's current value, then take over. A parameter sitting outside the mapping's range is picked up when the control reaches that end of its travel, and steps to the end of the range. |
 
 `jump` is the default and is the older behaviour. `pickup` is what kills the value jump when a fader is not where the patch left the parameter.
 

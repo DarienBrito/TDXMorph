@@ -28,21 +28,20 @@ Creates an empty container for elements in the ParameterMorpher node.
 CreateFromLibrary(item, x=250, y=150, viewer=False)
 ```
 Copies "item" out of the internal `Lib/` at the given coordinates. Enables the viewer if viewer=True. The items are:
-  * 'PresetManager'
   * 'PresetGrabber'
   * 'PresetAnimator'
-  * 'ElementsContainer'
   * 'MorphingTimers'
   * 'MorphingChannels'
   * 'Patterns'
 
-Everything else under `Lib/` is internal structure (widget masters, element templates, the look and
+For a new container use `CreateContainer()`, and for a preset engine of your own use the standalone
+[PresetManager](../Documentation/PresetManager.md). Everything else under `Lib/` is internal structure (widget masters, element templates, the look and
 module libraries) rather than a library item. Copying one is unsupported and may break on any update.
 
 ```python
 ExposeChannels(x=0, y=0)
 ```
-Creates a node containing par CHOPs for the inner parameter channels of each container.
+Creates a node containing a par CHOP per container, with one channel per element (its value), named `<container>_<parameter>`.
 
 ```python
 ExposeTimers(x=0, y=0)
@@ -104,5 +103,5 @@ per-protocol section headers on the Mappings page. Mappings made in 4.x are not 
 `createBase` is gone. `'SceneLauncher'` is no longer a `CreateFromLibrary` item: it is a
 separate product with its own component.
 
-`ReportResult(msg, title)` is defined on `extElementsContainer`, not here. Reach it through a
-container, for example `op('ParameterMorpher').GetContainer(1).ReportResult(msg, title)`.
+`ReportResult(msg, title)` is promoted here, `op('ParameterMorpher').ReportResult(msg, title)`, and
+on each container.

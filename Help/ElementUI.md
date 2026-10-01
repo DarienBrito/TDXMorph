@@ -11,7 +11,7 @@
 ```python
 DestroyElement()
 ```
-Destroys the Widget.
+Destroys the Widget and removes its stored values from every preset.
 
 ```python
 EditCustomName(name)

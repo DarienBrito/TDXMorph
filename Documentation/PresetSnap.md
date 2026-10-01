@@ -30,7 +30,7 @@ Nothing in it cooks at rest: one table and two execute operators, all event driv
 - [Adding operator parameters](#adding-operator-parameters)
 - [What is never captured](#what-is-never-captured)
 - [Removing the tool](#removing-the-tool)
-- [Interchange with PresetManager](#interchange-with-presetmanager)
+- [Saving presets to a file](#saving-presets-to-a-file)
 - [Public methods](#public-methods)
 
 ---
@@ -178,14 +178,16 @@ Pulse **Remove Page** before deleting the component, or turn `Injectpage` off, w
 
 ---
 
-## Interchange with PresetManager
+## Saving presets to a file
 
 ```python
 op('PresetSnap').ToJSON()
 op('PresetSnap').FromJSON(text)
 ```
 
-The JSON is written in the PresetManager shape and carries the shared preset format version, so a project that outgrows plain snapping can export here and import into [PresetManager](PresetManager.md) or ParameterMorpher without retyping anything.
+`ToJSON` writes PresetSnap's own format: each preset maps a row token straight to its stored value, and the file is stamped as a PresetSnap file. `FromJSON` reads it back into any PresetSnap.
+
+It is not the [PresetManager](PresetManager.md) format, and the two do not convert. PresetManager, ParameterMorpher and SceneLauncher refuse a PresetSnap file and leave their own presets untouched.
 
 ---
 
@@ -204,7 +206,7 @@ Write one preset's column back onto the host. Returns the tally described in [St
 ```python
 NewPreset(name='')
 ```
-Append a preset and capture into it immediately. Returns the name used. With no name given it auto names, so `Preset 3`, and you rename it in the editor afterwards.
+Append a preset and capture into it immediately. Returns the name used. With no name given it auto names, so `Preset 3`, and you rename it in the editor afterwards. A name that is taken, or that is one of the table's own column names (`param`, `include`, `mode`), gets a number: `param 2`.
 
 ```python
 Delete(name)
@@ -214,7 +216,7 @@ Delete a preset column. Refuses to delete a header column.
 ```python
 Rename(old, new)
 ```
-Rename a preset. The new name is made unique against the existing ones rather than colliding.
+Rename a preset. The new name is made unique against the existing ones and the table's own column names rather than colliding.
 
 ```python
 PresetNames()
@@ -265,5 +267,5 @@ The COMP this component was dropped into, or None at the project root.
 ToJSON()
 FromJSON(text)
 ```
-Export and import in the PresetManager shape. `FromJSON` returns how many presets were read, and uniquifies any name that already exists.
+Export and import in PresetSnap's own format (see [Saving presets to a file](#saving-presets-to-a-file)). `FromJSON` returns how many presets were read, and uniquifies any name that already exists or is one of the table's column names.
 

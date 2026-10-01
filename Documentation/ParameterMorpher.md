@@ -433,7 +433,8 @@ using its interpolation curve.
 
 Two variants are useful while you are still building:
 
-- <kbd>Ctrl</kbd> + <kbd>Left Click</kbd> jumps straight to the preset with no interpolation.
+- <kbd>Ctrl</kbd> + <kbd>Left Click</kbd> jumps straight to the preset with no interpolation. Locked
+  elements keep their value, as with a plain click.
 - <kbd>Ctrl</kbd> + <kbd>Right Click</kbd> morphs over the container's global **Morph Time**
   rather than the time stored in the preset, for a quick transition check.
 
@@ -485,8 +486,8 @@ the engine reads only those. Setting them from Python does exactly what the pane
 | `Lfo` | Wave shape, used when the source is `LFO`. |
 | `Pattern` | Pattern type, used when the source is `Pattern`. |
 | `Frequency` | Rate in Hz, used when the syncing mode is free running. |
-| `Syncingmode` | Free running, locked to beats, bars or sixteenths, or locked to the project timeline. A `Timeline` source offers `Project` and `Custom` only. |
-| `Manualtrigger` | Advances a pattern by one step. |
+| `Syncingmode` | `Internal` (free running), `Manual`, locked to `Beat`, `Bar` or `Sixteenths`, or locked to the project `Timeline`. A `Timeline` source offers `Project` and `Custom` only. Under `Manual` the signal holds still and moves only on `Manualtrigger`. |
+| `Manualtrigger` | Advances a pattern by one step. An LFO or timeline signal restarts from its beginning; under `Manual` sync it then holds that value until the next trigger. |
 | `Beatfactor`, `Barfactor`, `Sixteenthsfactor` | Multipliers for the locked syncing modes. |
 | `Rangex`, `Rangey` | Output range. The raw signal is remapped into it. |
 | `Smoothingactive` | Turns output smoothing on. |
@@ -592,7 +593,8 @@ morpher = op('ParameterMorpher')
 
 
 - **`ExposeChannels(x=0, y=0)`**  
-  Creates a component exposing all **parameter channels** of the UI sliders.  
+  Creates a component exposing the **parameter channels** of the UI sliders: one channel per
+  element (its value), named after the container and the element's parameter.  
 
 ---
 
@@ -718,7 +720,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   Creates a special script element that executes custom code when triggered.  
 
 - **`ClearParameters()`**  
-  Removes all UI parameters after confirmation.  
+  Removes all UI parameters after confirmation. Their stored values leave every preset too, and
+  the confirmation says how many presets that affects.  
 
 - **`ResetParameters()`**  
   Resets all UI elements to their default stored values.  
@@ -736,9 +739,6 @@ This class is primarily used to create and manage **parameter-linked sliders** f
 - **`ExportPresetsJSON()`**  
   Exports all presets, bindings, and element data to a `.json` file.  
   Used for saving full configuration states including UI bindings.  
-
-- **`ExportPresetManager()`**  
-  Creates a copy of the internal `PresetManager` for standalone use.  
 
 - **`ImportPresetsJSON()`**  
   Imports presets and bindings from a `.json` file, reconstructing the UI and restoring order.  
@@ -769,8 +769,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
 
 ### Sequence Control
 
-- **`PresetsSequence(sortKeys=False, keysSequence=None)`**  
-  Traverses presets sequentially across all linked elements.  
+- **`PresetsSequence()`**  
+  Traverses the presets in the order their buttons show, across all linked elements.  
 
 ---
 
@@ -824,9 +824,16 @@ The following methods execute when connected callback scripts are defined:
 - **`OnPresetCall(manager, morphingType, presetName)`**  
   Triggered when a preset is invoked manually or programmatically.
 
-All callback functions look for an external module defined in  
-`Elementscontainercallbacks` and call corresponding `onMorphingStart`,  
-`onMorphingEnd`, or `onPresetCall` functions.
+Each one calls the matching function in the DAT set on `Elementscontainercallbacks`, passing the
+container first:
+
+```python
+def onMorphingStart(elementsContainer, presetManager, morphingType, presetName): ...
+def onMorphingEnd(elementsContainer, presetManager, morphingType, presetName): ...
+def onPresetCall(elementsContainer, presetManager, morphingType, presetName): ...
+```
+
+A blank `Elementscontainercallbacks`, or a DAT without the function, is ignored.
 
 ---
 

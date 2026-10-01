@@ -109,7 +109,7 @@ op('PresetManager').MorphPreset('intro')
 | `Searchin` | Menu | `Wholenetwork` | Scope for the tracked-node scan: whole network, or one operator. |
 | `Searchoperator` | OP | `''` | The operator to search inside when `Searchin` is `Specificoperator`. |
 | `Pathseditor` | Pulse | | Open the paths editor. |
-| `Pathsupdate` | Pulse | | Re-scan for tracked nodes that have moved and re-key their presets. |
+| `Pathsupdate` | Pulse | | Re-scan for tracked nodes that have moved and re-key their presets. Copies of a node still in place are ignored; a path several nodes claim is left alone and they are named. |
 | `Pathsclear` | Pulse | | Remove every tracked path and strip its TDXMorph tag. |
 
 ### Triggering
@@ -197,6 +197,8 @@ Each entry in `params` is a serialized `ParamState`:
 {'paramName': 'period', 'value': 1.0, 'type': 'Float', 'isOP': False, 'locked': False,
  'normMin': 0.0, 'normMax': 1.0, 'min': 0.0, 'max': 10.0}
 ```
+
+`locked` is for display only. It records a ParameterMorpher element's own Lock at store time and is never read on recall: the live Lock decides what a preset may change.
 
 The four range keys are present only for a **full** capture (`StorePreset`). Transient *essential* captures, used for the start state of a morph, leave them out.
 
@@ -312,7 +314,7 @@ Get/set the random distribution by name.
 ```python
 StorePreset(name=None, trackConfig=None)
 ```
-Capture the current parameter state of every tracked node into a preset. Falls back to the `Presetname` parameter when `name` is omitted. `trackConfig` is an optional `path -> {time, curve, distr, ...}` mapping that lets a host inject per-track fields at capture time; any key you leave out falls back to the global value. When `trackConfig` is `None`, an existing preset keeps its per-track fields, so re-storing does not flatten them.
+Capture the current parameter state of every tracked node into a preset. Falls back to the `Presetname` parameter when `name` is omitted. `trackConfig` is an optional `path -> {time, curve, distr, ...}` mapping that lets a host inject per-track fields at capture time; any key you leave out falls back to the global value. When `trackConfig` is `None`, time, curve and shape are captured from the paths editor, and an existing preset keeps its other per-track fields (distribution, group, end mode), so re-storing does not flatten them. A path whose Filter matches no parameter is skipped and named in one report; the other paths still store.
 
 ```python
 StorePresetWithData(name, data)
@@ -322,7 +324,7 @@ Store a preset from an explicit data block instead of from the current state. `d
 ```python
 SetPreset(name=None)
 ```
-Apply a stored preset's values immediately, with no interpolation.
+Apply a stored preset's values immediately, with no interpolation. A morph in progress is stopped first, so the new values stick.
 
 ```python
 DeletePreset(name=None)
@@ -330,9 +332,9 @@ DeletePreset(name=None)
 Delete a preset by name. Falls back to the `Presetname` parameter.
 
 ```python
-ClearPresets(overwriteWarning=True)
+ClearPresets(overwriteWarning=False)
 ```
-Delete every preset. Prompts for confirmation unless `overwriteWarning` is False.
+Delete every preset. Prompts for confirmation unless `overwriteWarning` is True.
 
 ```python
 OverwriteCurrentPreset()
@@ -342,7 +344,7 @@ Re-store the currently targeted preset from the current parameter values.
 ```python
 OverwritePresetsValue(item, val)
 ```
-Overwrite one field across **all** presets and all their tracks. Useful for retiming a whole set at once, for example `OverwritePresetsValue('time', 4.0)`.
+Overwrite one field across **all** presets, all their tracks and each preset's global block, which is what a morph reads with Multitrack off. Useful for retiming a whole set at once, for example `OverwritePresetsValue('time', 4.0)`. Setting `curve` also resets `a`, `b` and `c` to that curve's defaults.
 
 ```python
 OverwriteSinglePresetValue(name, item, val)
@@ -371,7 +373,7 @@ Refresh the `Target` parameter menu from the stored preset names. Call this afte
 ExportJSON()
 ImportJSON()
 ```
-Prompt for a file and export or load presets plus tracked paths as JSON.
+Prompt for a file and export or load presets plus tracked paths as JSON. Import refuses a file it cannot use (unreadable, a newer format, another tool's file such as a PresetSnap export, or presets of the wrong shape), says why, and changes nothing. After an import, the report lists any path that points at no operator in this project; edit or remove those in the paths editor.
 
 ```python
 InjectPresets(presets, paths)
@@ -389,7 +391,7 @@ Morph from the current state to `presetName`. Without overrides, each track uses
 SetRandom(mode=None)
 MorphRandom(mode=None)
 ```
-Randomize the targeted parameters, either instantly or through a morph. Both respect `AutoMode`, running a single step or a sequence of `NumMorphs`.
+Randomize the targeted parameters, either instantly or through a morph. Both respect `AutoMode`, running a single step or a sequence of `NumMorphs`. A morph in progress is stopped first. `mode` picks the distribution for this call only, and an auto sequence keeps it for every step; to change it for good, set `Randomdistribution`.
 
 ```python
 PresetsSequence(sortKeys=False, keysSequence=None)
@@ -459,15 +461,15 @@ Per-track fields are captured into the preset by `StorePreset`, and can be edite
 pm = op('PresetManager')
 morpher = pm.op('PresetMorpher')
 
-# per-track overrides for the next trigger
+# per-track overrides for the next random morph
 morpher.SetTrackConfig({
     '/project1/noise1': {'dur': 4.0, 'curve': 'Scurve'},
     '/project1/noise2': {'dur': 1.0, 'curve': 'Easeout', 'endmode': 'loop'},
 })
-pm.MorphPreset('intro')
+pm.MorphRandom()
 ```
 
-`SetTrackConfig` is a **per-trigger input, not session state**. The host pushes it just before each morph, and `MorphPreset` restores the previous value when the call finishes. To inspect what a track is actually morphing with, read its row in the engine's `trackTable` rather than reading the config back.
+`SetTrackConfig` is a **per-trigger input, not session state**. The host pushes it just before each morph. A preset morph does not use it: `MorphPreset` morphs each track with the values stored in the preset (time, curve, shape, group and end mode), then restores the previous config when the call finishes. To give a preset its own per-track values, store it with them. A plain Store takes time, curve and shape from the paths editor. A script can set every per-track field, end mode and group included, with `StorePreset(name, trackConfig={path: {'time': 2.0, 'curve': 'Linear', 'endmode': 'loop'}})`; any field it leaves out falls back to the global value. To inspect what a track is actually morphing with, read its row in the engine's `trackTable` rather than reading the config back.
 
 ### End modes
 
@@ -512,7 +514,7 @@ def onPresetCall(presetManager, morphingType, presetName):
 	return
 ```
 
-`onMorphingStart` and `onMorphingEnd` fire for every morph, including random ones. `onPresetCall` fires only when a named preset is invoked, which is the hook you want for cueing and follow actions.
+`onMorphingStart` and `onMorphingEnd` fire for every morph, including random ones. With Multi-Track Engine on, a track in `loop` or `pingpong` never finishes, so `onMorphingEnd` (and anything chained to it, such as SceneLauncher follow actions) waits until the morph is stopped. `onPresetCall` fires only when a named preset is invoked, which is the hook you want for cueing and follow actions.
 
 ---
 
@@ -520,11 +522,10 @@ def onPresetCall(presetManager, morphingType, presetName):
 
 Curves are registered in `PresetMorpher/curveLib`, which also holds each curve's default shape coefficients. The `Morphcurve` menu exposes:
 
-`Linear`, `Scurve`, `Doubleoddpolynomial`, `Quadraticviapoint`, `Exponentialeasing`, `Easein`, `Easeout`.
+`Linear`, `Scurve`, `Doubleoddpolynomial`, `Quadraticviapoint`, `Exponentialeasing`, `Easein`, `Easeout`,
+`Sigmoid`, `Circulareasein`, `Circulareaseout`, `Sine`, `Rect`, `Tri`, `Random`, `SnapIn` and `SnapOut`.
 
-The registry holds **16** shapes, so the library implements more than the menu exposes. The
-nine extras are `Sigmoid`, `Circulareasein`, `Circulareaseout`, `Sine`, `Rect`, `Tri`,
-`Random`, `SnapIn` and `SnapOut`. They are reachable from the registry by name.
+That is all **16** shapes the registry holds.
 
 Distributions come from `RandomGenerator`: `Uniform`, `Normal`, `Beta`.
 

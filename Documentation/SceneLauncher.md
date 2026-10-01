@@ -212,7 +212,7 @@ This class acts as an **alternative UI** for the PresetManager, allowing users t
 - Build and manage scenes visually.
 - Link each scene to a preset target.
 - Define morph timing and interpolation curves.
-- Create follow actions (like *Next*, *Repeat*, *Random*, etc.).
+- Create follow actions (like *Next*, *Repeat*, *Any*, etc.).
 - Export and import full scenes and presets as `.json` files.
 - Automatically build animations from existing scenes.
 
@@ -277,8 +277,9 @@ The same menu holds the rest of the scene-level actions: *Duplicate*, *Clear sce
 the attached manager. Pick one.
 
 **Curve** and **Action** open on <kbd>Right Click</kbd> the same way: Curve chooses the
-interpolation shape, Action chooses the follow action (*Next*, *Repeat*, *Random* and so on)
-that fires when the scene finishes.
+interpolation shape, Action chooses the follow action that fires when the scene finishes:
+*None*, *Repeat*, *Previous*, *Next*, *First*, *Last*, *Any* (a random scene) or *Other* (a
+random scene other than this one).
 
 **Scene**, **Length**, **Delay** and **Script** are inline text cells instead: click and type.
 The **color** swatch and the trash icon are left-click buttons.
@@ -297,6 +298,10 @@ Click the **launch icon** in the scene's row, the fourth column, just right of t
 
 That icon is the only thing that launches a scene. Double-clicking any other cell is
 deliberately inert, so editing a Curve or Action can never fire the scene by accident.
+
+A scene with a **Delay** waits that long before it morphs. The last launch wins: any new
+launch (the launch icon, Go, a follow action or a Sequence step) cancels launches still
+waiting out their Delay, so delayed launches never stack.
 
 Build up a few scenes, give them follow actions, and the launcher will run them as a cue
 list. `Totaldurationf` and `Totaldurations` on the **Info** page report the total.
@@ -372,7 +377,9 @@ launcher = op('SceneLauncher')
   Creates a new scene entry with default parameters (length, delay, curve, color, etc.).
 
 - **`DuplicateScene(name, sourceName)`**  
-  Duplicates an existing scene, appending `_copy` or renaming to avoid overwriting.
+  Copies `sourceName` into a new scene and returns the name it got. It never overwrites: the
+  same name as the source becomes `<name>_copy`, and a taken name gets a numeric suffix (`_2`,
+  `_3`, ...). Returns `''` when there is no scene called `sourceName`.
 
 - **`WriteScenes()`**  
   Writes all scene data to the UI table and updates total duration information.
@@ -443,7 +450,9 @@ component. None of these opens a dialog; a call that cannot be honoured returns 
 
 - **`RenamePreset(old, new)`** / **`DeletePreset(name)`** / **`ClearPresets()`**  
   Rename, delete, or delete all. Each one updates every scene aiming at the affected
-  preset: a rename follows, a delete or a clear resets the target to `'None'`.
+  preset: a rename follows, a delete or a clear resets the target to `'None'`. A rename or a
+  delete also refreshes the PresetManager's Target menu: a Target on the renamed preset follows
+  it, and one on a deleted preset falls back to the first preset.
 
 - **`ReorderPresets(order)`**  
   Same permutation rule as `ReorderScenes`.
@@ -498,7 +507,8 @@ component. None of these opens a dialog; a call that cannot be honoured returns 
   Returns a list of available follow actions (`None`, `Next`, `Repeat`, etc.).
 
 - **`EnableFollowActions(enable=True)`**  
-  Toggles the follow action system that triggers automatic scene transitions.
+  Arms or disarms the follow action that runs when the current morph completes. A scene launch
+  arms it; Stop disarms it.
 
 - **`DelayedPresetTrigger(target, length, curve)`**  
   Executes a delayed preset morph, using the scene’s timing and curve.
@@ -522,7 +532,8 @@ They allow stepping through, randomizing, or looping scenes.
 
 - **`ImportPresetsJSON()`**  
   Imports both presets and scenes from a `.json` file.  
-  Also injects the preset data into the linked `PresetManager`.
+  The file is checked and its presets handed to the linked `PresetManager` before any scene is
+  replaced, so a refused file leaves scenes and presets untouched.
 
 - **`ExportPresetsJSON()`**  
   Exports all current scenes and presets into a single `.json` file.  

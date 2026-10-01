@@ -33,7 +33,8 @@ skipped, by reason: `written`, `skipped_excluded`, `skipped_missing`, `skipped_m
 NewPreset(name='')
 ```
 Append a preset and capture into it. Returns the name used. With no name it auto names, so
-`Preset 3`.
+`Preset 3`. A taken name, or one of the header column names (`param`, `include`, `mode`), gets a
+number: `param 2`.
 
 ```python
 Delete(name)
@@ -43,7 +44,8 @@ Delete a preset column. Refuses to delete one of the three header columns.
 ```python
 Rename(old, new)
 ```
-Rename a preset. The new name is uniquified rather than allowed to collide.
+Rename a preset. The new name is uniquified against the presets and the header column names rather
+than allowed to collide.
 
 ```python
 PresetNames()
@@ -103,9 +105,10 @@ The COMP this component was dropped into, or None at the project root.
 ToJSON()
 FromJSON(text)
 ```
-Export and import in the PresetManager shape, carrying the shared preset format version, so presets
-can graduate to the larger tools. `FromJSON` returns how many presets were read and uniquifies any
-name that already exists.
+Export and import in PresetSnap's own format: each preset maps a row token to its stored value, and
+the file is stamped as a PresetSnap file. It is not the PresetManager format; PresetManager,
+ParameterMorpher and SceneLauncher refuse it and change nothing. `FromJSON` returns how many presets
+were read and uniquifies any name that already exists or is a header column name.
 
 ## Editor
 

@@ -81,9 +81,9 @@ Get/set the random distribution by name.
 ### Promoted
 
 ```python
-ClearPresets(overwriteWarning=True)
+ClearPresets(overwriteWarning=False)
 ```
-Destroys all stored presets. Prompts for confirmation unless overwriteWarning is False.
+Destroys all stored presets. Prompts for confirmation unless overwriteWarning is True.
 
 ```python
 DeletePreset(name=None)
@@ -138,7 +138,8 @@ Go over all target operators and get their full states, including ranges. Return
 ```python
 ImportJSON()
 ```
-Prompts for a JSON file and loads its presets and paths.
+Prompts for a JSON file and loads its presets and paths. A file it cannot use is refused with the
+reason and changes nothing; the import report lists any path that points at no operator.
 
 ```python
 InjectPresets(presets, paths)
@@ -158,7 +159,9 @@ Morphs from the current state to the given preset. Without overrides each track 
 ```python
 MorphRandom(mode=None)
 ```
-Morphs parameters toward randomized target values. Respects AutoMode.
+Morphs parameters toward randomized target values. Respects AutoMode. mode picks the distribution
+for this call only (an auto sequence keeps it for every step); to change it for good, set
+Randomdistribution.
 
 ```python
 OverwriteCurrentPreset()
@@ -168,7 +171,9 @@ Re-stores the currently targeted preset from the current parameter values.
 ```python
 OverwritePresetsValue(item, val)
 ```
-Overwrites one item, for example 'time' or 'curve', across all presets and all their tracks.
+Overwrites one item, for example 'time' or 'curve', across all presets, all their tracks and each
+preset's global block, which is what a morph reads with Multitrack off. Setting 'curve' also resets
+a, b and c to that curve's defaults.
 
 ```python
 OverwriteSinglePresetValue(name, item, val)
@@ -198,12 +203,13 @@ Sets the blending for the specified presets. Calls the same method in the inner 
 ```python
 SetPreset(name=None)
 ```
-Applies the specified preset immediately, with no interpolation. If no name is supplied the one found in the custom parameters of PresetManager will be used.
+Applies the specified preset immediately, with no interpolation. If no name is supplied the one found in the custom parameters of PresetManager will be used. A morph in progress is stopped first, so the new values stick.
 
 ```python
 SetRandom(mode=None)
 ```
-Jumps all targeted parameters to a new random state, with no interpolation. Respects AutoMode.
+Jumps all targeted parameters to a new random state, with no interpolation. Respects AutoMode. A
+morph in progress is stopped first, so the new values stick. mode applies to this call only.
 
 ```python
 StopMorphing()
@@ -213,7 +219,7 @@ Stops the morph. Disarms every per-track cadence and resets the clock so the cha
 ```python
 StorePreset(name=None, trackConfig=None)
 ```
-Stores a preset with the given name, capturing the current state of every tracked node. If no name is supplied the one found in the custom parameters of PresetManager will be used. trackConfig optionally injects per-track timing at capture time.
+Stores a preset with the given name, capturing the current state of every tracked node. If no name is supplied the one found in the custom parameters of PresetManager will be used. trackConfig optionally injects per-track timing at capture time. A path whose Filter matches no parameter is skipped and named in one report; the other paths still store.
 
 ```python
 StorePresetWithData(name, data)
@@ -245,7 +251,7 @@ Check if there's an embedded UI to get locked status from, otherwise grab the st
 ```python
 getParameterSelection(target, sel, scope)
 ```
-Return the target's parameters of the given kind whose names match the scope regex.
+Return the target's parameters of the given kind whose names match the scope regex. A scope that is not a valid regex (such as `*`) is read as a wildcard pattern.
 
 ```python
 getParameterValue(par)

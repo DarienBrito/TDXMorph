@@ -88,7 +88,7 @@ Morph from the current values to the named preset. If morphTime or morphCurve is
 ```python
 MorphRandom(mode=None)
 ```
-Morph all targeted parameters toward a new random state. Replaces the old RandomMorph.
+Morph all targeted parameters toward a new random state. `mode` picks the distribution for this call only. Replaces the old RandomMorph.
 
 ```python
 PlayMorphing(play=True)
@@ -123,7 +123,7 @@ Sets current morpher preset name to the given one, here and on the PresetManager
 ```python
 SetRandom(mode=None)
 ```
-Jump all targeted parameters to a new random state, with no interpolation. Replaces the old Randomize.
+Jump all targeted parameters to a new random state, with no interpolation. A morph in progress is stopped first, so the new values stick. `mode` picks the distribution for this call only. Replaces the old Randomize.
 
 ```python
 SetSpecialValues()
@@ -131,9 +131,9 @@ SetSpecialValues()
 Sets non-interpolatable values to the given state. Used only for preset setting, since one cannot interpolate str, ops and similar.
 
 ```python
-StopMorphing()
+StopMorphing(dropWriteback=False)
 ```
-Halt the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking.
+Halt the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking. Pass `dropWriteback=True` when a direct write follows, so the morph's last frame cannot overwrite it.
 
 ```python
 UpdateTables()
@@ -147,7 +147,7 @@ These exist in both modes but only do interesting work with the multi-track engi
 ```python
 SetTrackConfig(config)
 ```
-Set per-track timing and curve overrides, as `track id -> {dur, curve, a, b, c, group, endmode}`. This is a per-trigger input, not session state: the host pushes it just before each morph and MorphPreset restores the previous value when the call finishes.
+Set per-track timing and curve overrides, as `track id -> {dur, curve, a, b, c, group, endmode}`. This is a per-trigger input, not session state: the host pushes it just before each morph. MorphPreset ignores it and uses the per-track values stored in the preset, then restores the previous value when the call finishes.
 
 ```python
 MorphTrack(track, mode=None)

@@ -33,7 +33,7 @@ Sets the number of presets in the Elements container to newVal.
 ```python
 ClearParameters()
 ```
-Deletes all elements in the ElementsContainer.
+Deletes all elements in the ElementsContainer, after a confirmation, and removes their stored values from every preset. The confirmation says how many presets that affects.
 
 ```python
 CreateElement(source, parameter, dataSource='parameter', customName=None)
@@ -44,11 +44,6 @@ Handles UI creation from a stored preset or from a grabbed parameter. In here op
 Delete()
 ```
 Deletes the ElementsContainer.
-
-```python
-ExportPresetManager()
-```
-Creates a copy of the local preset manager on the level of TDXMorph for independent use, for instance with a preset composer or animator.
 
 ```python
 ExportPresetsJSON()
@@ -91,9 +86,19 @@ MorphGroup(tag, mode=None)
 Morphs only the interpolatable elements whose MorphSettings.Group matches tag, each to a fresh random target on its own timing and curve. Forces the engine's per-track gate on, and elements outside the group keep their absolute start.
 
 ```python
+RekeyMovedElements()
+```
+Re-keys this container's paths, presets and bindings onto its own elements after a rename, move or copy. Runs on load and when the container is renamed. Returns `{old path: new path}` for what moved.
+
+```python
 RenamePresetsOrder()
 ```
 Renames the found presets in the order which they visually have.
+
+```python
+RepairCallbackWiring()
+```
+Points the embedded engine's callbacks parameter at this container's callback bridge when it is blank or wrong. Runs on load. Returns True when it rewired.
 
 ```python
 ReportResult()

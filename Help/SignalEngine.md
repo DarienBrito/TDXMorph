@@ -41,9 +41,8 @@ empties.
 ```python
 RefreshPatterns()
 ```
-Drop the cached patterns so the next cook rebuilds them from the current values. Needed when
-a pattern's values change but its type does not, since the service caches generators by type
-name and would otherwise replay the old values.
+Rebuild only the cached patterns whose type or values changed, then re-read the model. An
+unchanged pattern keeps its position and held value, so redrawing an editor never restarts it.
 
 ```python
 Write(chanName, val)

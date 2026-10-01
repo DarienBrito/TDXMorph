@@ -119,7 +119,8 @@ Set one mapping's target range, by 1-based table row. A learned menu parameter s
 SetMappingTakeover(rowIndex, mode)
 ```
 Set takeover to `'jump'`, which writes immediately, or `'pickup'`, which waits until the incoming
-control crosses the parameter's current value before taking over.
+control crosses the parameter's current value before taking over. A parameter outside the mapping's
+range is picked up at that end of the control's travel.
 
 ```python
 ToggleMappingTakeover(rowIndex)
