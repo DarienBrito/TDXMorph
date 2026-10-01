@@ -67,7 +67,7 @@ Both set `Source` to `Data` for you.
 |---|---|---|---|
 | `Source` | Menu | `Input` | Where the data comes from: `Input`, `File` or `Data`. |
 | `File` | File | `''` | The JSON file to read when `Source` is `File`. |
-| `Search` | Str | `''` | Filter the tree. Branches whose subtree matches stay visible. |
+| `Search` | Str | `''` | Filter the tree. Branches whose subtree matches stay visible. A saved search filters again on reopen. |
 | `Expandall` | Pulse | | Expand every branch. |
 | `Collapseall` | Pulse | | Collapse every branch. |
 | `Editable` | Toggle | `On` | Allow inline editing of leaf values. |
@@ -117,7 +117,7 @@ Turn `Schemaaware` off to see the raw structure, which is useful when debugging 
 
 ## Editing
 
-With `Editable` on, double-click a value cell to edit it in place. The new text is **coerced back to the old value's type**, so editing a float leaves a float and a bad numeric entry is rejected rather than silently turning the value into a string.
+With `Editable` on, double-click a value cell to edit it in place. The new text is **coerced back to the old value's type**, so editing a float leaves a float and a bad numeric entry is rejected rather than silently turning the value into a string. A whole number takes a typed fraction and becomes a decimal; a whole number typed over it stays a whole number.
 
 An edit is persisted to the tree's own source when that source can accept it, meaning the `Data` object or the `File`. The component then fires the `Onedit` pulse so a host can react.
 
@@ -145,6 +145,11 @@ Push raw JSON text, or a Python dict or list, into the tree. Both set `Source` t
 Rebuild()
 ```
 Re-parse the source, rebuild the node model and re-render.
+
+```python
+RebuildIfChanged()
+```
+Rebuild only when the source text or `Schemaaware` changed since the last rebuild. Returns True when it rebuilt. The tree uses it for its own source watching, so one edit parses once.
 
 ```python
 ExpandAll()

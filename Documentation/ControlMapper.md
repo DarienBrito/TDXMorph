@@ -163,6 +163,8 @@ To re-key an existing mapping onto a different control, arm the row instead of t
 ArmRow(3)
 ```
 
+The row only takes the new channel. Its range, takeover and place in the list stay as they were. Learning a control that is already mapped, by clicking it in map mode, re-keys its row the same way.
+
 Arming the same target twice disarms it. `Cancel` disarms without changing the map.
 
 While something is armed the service blinks it, driven by one LFO and one execute DAT for the whole host rather than a blink chain inside every control.
@@ -181,12 +183,14 @@ SetMappingRange(1, 0.2, 0.8)
 
 A learned **menu** parameter spans `0` to `N`, not `0` to `N-1`. TouchDesigner floors a menu value to an index, so a `0..N-1` range leaves the last item reachable from a single raw MIDI value while every other item gets eight or nine of them. `Route` clamps the top, so `N` is safe.
 
-Takeover decides what happens on the first move after a mapping goes live:
+Takeover decides what happens when the control and the parameter disagree:
 
 | **Mode** | **Behaviour** |
 |---|---|
 | `jump` | Write immediately. The parameter snaps to wherever the control already sits. |
-| `pickup` | Write nothing until the incoming control crosses the parameter's current value, then take over. A parameter sitting outside the mapping's range is picked up when the control reaches that end of its travel, and steps to the end of the range. |
+| `pickup` | Write nothing until the incoming control crosses the parameter's current value, then take over. A parameter sitting outside the mapping's range is picked up when the control reaches that end of its travel, and steps to the end of the range. A menu is picked up when the control reaches the selected item. |
+
+Pickup re-arms: when something else moves the parameter after the control took over (a preset recall, a morph, a hand edit), the control waits again until it reaches the new value. A range wider than the parameter's own clamp does not count as a move.
 
 `jump` is the default and is the older behaviour. `pickup` is what kills the value jump when a fader is not where the patch left the parameter.
 

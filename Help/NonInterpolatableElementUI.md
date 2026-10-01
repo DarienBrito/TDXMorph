@@ -16,12 +16,12 @@ Destroys the Widget and removes its stored values from every preset.
 ```python
 EditCustomName(name)
 ```
-Change the name of the slider in the custom entry (maintains original name intact).
+Sets the element's display name and keeps it through a rebuild. The bound parameter keeps its own name.
 
 ```python
 GetPresetsManager()
 ```
-Returns the deply dependable dictionary that holds presets.
+Returns the container's PresetManager.
 
 ```python
 Reorder(name, source, receiver)

@@ -93,7 +93,7 @@ Destroys all stored presets. Prompts for confirmation unless overwriteWarning is
 ```python
 DeletePreset(name=None)
 ```
-Delete the specified preset. If no name is supplied the one found in the custom parameters of PresetManager will be used.
+Delete the specified preset. If no name is supplied, the Target preset is deleted.
 
 ```python
 ExportJSON()
@@ -113,7 +113,7 @@ Go over all target operators and get their essential states for morphing. Return
 ```python
 GetEssentialStatesFrom(presetName)
 ```
-Build essential morph states for every node stored in the given preset.
+Build essential morph states for every node stored in the given preset. A stored node that no longer exists is skipped and named in one report.
 
 ```python
 GetMorphCurvesNames()
@@ -188,7 +188,7 @@ The same, scoped to one named preset.
 ```python
 PlayMorphing(play=True)
 ```
-Play/Pauses the morphing clock.
+Pauses (False) or resumes (True) the running morph where it is. A new morph or StopMorphing ends a pause; with no morph running a pause does nothing.
 
 ```python
 PresetsSequence(sortKeys=False, keysSequence=None)
@@ -208,18 +208,19 @@ Sets the blending for the specified presets. Calls the same method in the inner 
 ```python
 SetPreset(name=None)
 ```
-Applies the specified preset immediately, with no interpolation. If no name is supplied the one found in the custom parameters of PresetManager will be used. A morph in progress is stopped first, so the new values stick.
+Applies the specified preset immediately, with no interpolation. If no name is supplied, the Target preset is used. A morph in progress is stopped first, so the new values stick. A stored node or parameter that no longer exists is skipped and named in one report.
 
 ```python
 SetRandom(mode=None)
 ```
 Jumps all targeted parameters to a new random state, with no interpolation. Respects AutoMode. A
-morph in progress is stopped first, so the new values stick. mode applies to this call only.
+morph in progress is stopped first, so the new values stick. mode applies to this call only. A Menu
+or StrMenu parameter gets one of its own items, drawn over the whole list.
 
 ```python
 StopMorphing()
 ```
-Stops the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking.
+Stops the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking. A running morph or auto sequence ends: onMorphingEnd fires with its type, and an auto sequence starts again from its first step.
 
 ```python
 StorePreset(name=None, trackConfig=None)

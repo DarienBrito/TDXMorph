@@ -73,7 +73,7 @@ Returns the internal preset manager for this ElementsContainer.
 ```python
 HardSyncLFOs()
 ```
-Resyncs all LFO's in the inner elements of the ElementsContainer.
+Restarts the phase of every running LFO signal in the container, so they move in step. Pattern signals and Timeline-synced LFOs are left as they are.
 
 ```python
 ImportPresetsJSON()
@@ -98,7 +98,7 @@ Re-keys this container's paths, presets and bindings onto its own elements after
 ```python
 RenamePresetsOrder()
 ```
-Renames the found presets in the order which they visually have.
+Renames the found presets in the order which they visually have. The selected preset and Blend A/B follow their presets to the new names.
 
 ```python
 RepairCallbackWiring()
@@ -185,17 +185,17 @@ Returns element in position elementNum in ElementsContainer.
 ```python
 HardSyncLFOs()
 ```
-Hard syncs LFO's in the Container from the UI level.
+Restarts every running LFO in the container at a common phase.
 
 ```python
 SetPreset(int)
 ```
-Sets the targetted preset from the UI level.
+Sets the targetted preset from the UI level. A slot is a whole number from 1 (`2.0` counts as 2); anything else gives a warning.
 
 ```python
 StorePreset(int)
 ```
-Stores the targetted preset from the UI level.
+Stores the targetted preset from the UI level. Same slot rule as `SetPreset`.
 
 ```python
 ExportPresetsJSON()

@@ -411,9 +411,10 @@ Drag parameters onto the container panel from the network:
 
 - **Drag a single parameter** (from the parameter dialog) onto the container to get one
   slider bound to it. This works for any parameter, built in or custom.
-- **Drag a whole node** onto the container to get one element per parameter, but note that
-  this picks up **custom parameters only**. Dropping a node that has none, a Noise TOP for
-  example, creates nothing. Drag that node's individual parameters instead.
+- **Drag a whole node** onto the container (or onto any element row in it) to get one element
+  per parameter, but note that this picks up **custom parameters only**. Dropping a node that
+  has none, a Noise TOP for example, creates nothing. Drag that node's individual parameters
+  instead.
 
 Each element stays bound to its source parameter, so moving the slider drives the original
 node directly.
@@ -500,6 +501,10 @@ Pattern values are stored separately, as JSON on the element's `Patterndata` par
 pattern type keeps its own entry, so switching type and switching back preserves what you
 entered. Projects made before 4.7.0 migrate automatically the first time they load.
 
+In the pattern editor a sequence can be typed with spaces, commas, semicolons or brackets
+(`0.1, 0.5, 1` and `[0.1 0.5 1]` both work). An entry that is not a number is refused with a
+message naming it, and a `Pwrand` needs exactly one weight per value.
+
 Enabling a signal from Python has one wrinkle worth knowing. A parameter execute DAT does not fire in the frame its element was created, so setting `Enablesignal` straight after creating an element starts the signal but builds no controls, and the element then has to be toggled twice by hand. Call `EnableSignal(True)` on the element instead: it writes the same parameter and drives the build directly. It is idempotent, so the execute DAT firing a frame later is a no-op.
 
 ### Pattern types
@@ -513,7 +518,7 @@ supported way to script patterns; writing `Patterndata` by hand is not.
 | `SetPrand(sequence)` | Random picks from the sequence. |
 | `SetPxrand(sequence)` | Random picks with no immediate repeats. |
 | `SetPshuffle(sequence)` | The sequence shuffled once, then looping. |
-| `SetPwrand(sequence, weights)` | Random picks biased by `weights`. |
+| `SetPwrand(sequence, weights)` | Random picks biased by `weights`, one per value. Without `weights`, every value gets equal odds. |
 | `SetPseries(start, step, length)` | An arithmetic series. |
 | `SetPgeom(start, grow, length)` | A geometric series. |
 | `SetPwhite(lo, hi)` | Uniform random values between `lo` and `hi`. |
@@ -530,7 +535,8 @@ runs only while that table has a row, so a component with no signals enabled cos
 when idle.
 
 The service API is documented in [Help/SignalEngine.md](../Help/SignalEngine.md). To resync
-every LFO in a container to a common phase, call `HardSyncLFOs()` on the container.
+every running LFO in a container to a common phase, call `HardSyncLFOs()` on the container. Pattern
+signals and Timeline-synced LFOs are left as they are.
 
 ---
 
@@ -698,7 +704,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   Adjusts the height of the container based on its content.  
 
 - **`HardSyncLFOs()`**  
-  Resynchronizes all internal LFOs across contained elements.  
+  Restarts the phase of every running LFO signal in the container, so they move in step.
+  Pattern signals and Timeline-synced LFOs are left as they are.  
 
 - **`ChangePresetsNum(newVal)`**  
   Changes the number of presets available in the container.  
@@ -727,7 +734,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   Resets all UI elements to their default stored values.  
 
 - **`RenamePresetsOrder()`**  
-  Renames and reorders presets based on current UI order.  
+  Renames and reorders presets based on current UI order. The selected preset and the blend
+  endpoints follow their presets to the new names.  
 
 - **`ExpertMode(value)`**  
   Enables or disables “Expert Mode” for advanced control settings.  
@@ -795,13 +803,15 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   Gets or sets the total number of available presets.  
 
 - **`StorePreset(slot)`**  
-  Stores the current preset into a numbered slot.  
+  Stores the current preset into a numbered slot. A slot is a whole number from 1 up to
+  `NumberOfPresets` (`2.0` counts as 2); anything else gives a warning.  
 
 - **`SetPreset(slot)`**  
-  Loads and activates a stored preset.  
+  Loads and activates a stored preset. Same slot rule as `StorePreset`.  
 
 - **`DeletePreset(slot)`**  
-  Deletes a stored preset by index.  
+  Deletes a stored preset by index (a whole number from 1; a slot above the current count can
+  still be deleted).  
 
 - **`GetElement(elementNum)`**  
   Returns a specific UI element by its numeric order.  

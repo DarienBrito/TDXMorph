@@ -86,6 +86,12 @@ Rebuild()
 Re-parse the source, rebuild the node model and re-render.
 
 ```python
+RebuildIfChanged()
+```
+Rebuild only when the source text or Schemaaware changed since the last rebuild. Returns True when
+it rebuilt.
+
+```python
 SetData(obj)
 ```
 Push a Python dict or list into the tree. Sets Source to Data.
@@ -126,7 +132,8 @@ with a parameter execute.
 ## Notes
 
 An edit is coerced back to the old value's type, so editing a float leaves a float and a bad
-numeric entry is rejected rather than silently becoming a string.
+numeric entry is rejected rather than silently becoming a string. A whole number takes a typed
+fraction and becomes a decimal.
 
 A persist that fails is reported rather than announced as a success.
 

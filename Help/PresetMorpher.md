@@ -108,7 +108,7 @@ Morph all targeted parameters toward a new random state. `mode` picks the distri
 ```python
 PlayMorphing(play=True)
 ```
-Play or pause the morph by running or freezing the master clock.
+Pause (`False`) or resume (`True`) the running morph where it is. A pause mutes every track row and a resume un-mutes only the rows the pause muted, so a `MuteTrack` mute stays. A new morph or `StopMorphing` ends a pause; with no morph running a pause does nothing.
 
 ```python
 PresetsSequence(sortKeys=False, keysSequence=None)
@@ -148,7 +148,7 @@ Sets non-interpolatable values to the given state. Used only for preset setting,
 ```python
 StopMorphing(dropWriteback=False)
 ```
-Halt the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking. Pass `dropWriteback=True` when a direct write follows, so the morph's last frame cannot overwrite it.
+Halt the morph. Disarms every per-track cadence and resets the clock so the chain stops cooking. Pass `dropWriteback=True` when a direct write follows, so the morph's last frame cannot overwrite it. A running morph or auto sequence (also between two steps) ends here: `onMorphingEnd` fires with its type, the sequence count resets and any pause is dropped.
 
 ```python
 UpdateTables()
@@ -172,7 +172,7 @@ Morph a SINGLE track to a fresh random target, leaving other tracks untouched.
 ```python
 RandomizeTrack(track, mode=None)
 ```
-Instantly randomize ONE track's parameters in place, with no morph, using its stored ranges.
+Instantly randomize ONE track's parameters in place, with no morph, using its stored ranges. A Menu or StrMenu gets the item its drawn index lands on. Like `MorphTrack` and the per-track auto steps, it reads only that track, so a deleted neighbour does not stop it.
 
 ```python
 MuteTrack(path, on=True)
@@ -196,7 +196,7 @@ OnMorphingStart()
 OnMorphingEnd()
 OnPresetCall(isMorphed)
 ```
-Fire the corresponding user callbacks. `OnMorphingEnd` also resets the morphing type and idles the timer clock.
+Fire the corresponding user callbacks. `OnMorphingEnd` also resets the morphing type and idles the timer clock; the callback receives the type that ended.
 
 ### UI-level
 
@@ -226,11 +226,6 @@ Shift every trackTable start by the clock value about to be zeroed, so a stop or
 _seatTrack(track, paramValues)
 ```
 Rebuild the value tables preserving other tracks, seating the given one fresh.
-
-```python
-enableInterpolation(enabled)
-```
-Retained for callers. Inert since the cross-blend chain was removed.
 
 ```python
 getParameterValue(data)
@@ -268,7 +263,7 @@ setRandomVals(states=None)
 Randomizes values using the defined random distribution, writing directly to the parameters. Used by SetRandom.
 
 ```python
-setTimer(active=True, cycle=False, morphTime=None, triggeredTracks=None)
+setTimer(active=True, triggeredTracks=None)
 ```
 Rebuild the per-track progress table and set the active flag.
 
@@ -297,6 +292,6 @@ Fill newValues with random morph targets, according to the selected random distr
 `ActivityStatus` is now `IsActive`. `Randomize` is now `SetRandom`, `RandomMorph` is now
 `MorphRandom`, and `SetPreset` on this class is now `MorphPreset`.
 `MorphGivenParameters`, `RandomizeGivenParameters`, `RandomizeWithStoredRanges`,
-`RandomMorphWithStoredRanges`, `getStatesFromGivenParameters`, `inferRandMode` and
-`signalCompletion` are gone. Completion is now signalled through the trackDone chain rather
+`RandomMorphWithStoredRanges`, `getStatesFromGivenParameters`, `inferRandMode`,
+`signalCompletion` and the inert `enableInterpolation` are gone. Completion is now signalled through the trackDone chain rather
 than by flipping a constant.

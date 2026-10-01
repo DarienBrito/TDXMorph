@@ -58,12 +58,14 @@ Re-read the column spec from the host, then refresh the rows.
 ```python
 EditCell(row, col, val)
 ```
-Commit an inline edit. Value cells are coerced to the old type, then the host is notified.
+Commit an inline edit. Value cells are coerced to the old type (a whole number takes a fraction as a
+decimal), then the host is notified.
 
 ```python
 Refresh()
 ```
-Re-read row data from the host and re-render.
+Re-read row data from the host and re-render. A selected row with a `_key` stays selected wherever it
+moves, and the selection clears when that row is gone.
 
 ```python
 Reorder(order)

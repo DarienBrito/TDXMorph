@@ -103,13 +103,13 @@ op('PresetManager').MorphPreset('intro')
 
 | **Parameter** | **Type** | **Default** | **Description** |
 |---|---|---|---|
-| `Presetname` | Str | `''` | Name used by Store, Delete and Overwrite when no name is passed. |
+| `Presetname` | Str | next free `PresetN` | Name used by Store when no name is passed. |
 | `Storepreset` | Pulse | | Capture the current state of every tracked node into a preset. |
 | `Clearpresets` | Pulse | | Delete all presets (asks for confirmation). |
 | `Searchin` | Menu | `Wholenetwork` | Scope for the tracked-node scan: whole network, or one operator. |
 | `Searchoperator` | OP | `''` | The operator to search inside when `Searchin` is `Specificoperator`. |
 | `Pathseditor` | Pulse | | Open the paths editor. |
-| `Pathsupdate` | Pulse | | Re-scan for tracked nodes that have moved and re-key their presets. Copies of a node still in place are ignored; a path several nodes claim is left alone and they are named. |
+| `Pathsupdate` | Pulse | | Re-scan for tracked nodes that have moved and re-key their presets. A moved path keeps its own time, curve and shape. Copies of a node still in place are ignored; a path several nodes claim is left alone and they are named. |
 | `Pathsclear` | Pulse | | Remove every tracked path and strip its TDXMorph tag. |
 
 ### Triggering
@@ -143,7 +143,7 @@ op('PresetManager').MorphPreset('intro')
 | `Blendactive` | Toggle | `Off` | Enable manual blending between two presets. |
 | `Blenda` / `Blendb` | Menu | | The two presets to blend. |
 | `Blendfactor` | Float | `0.0` | Crossfade position between A and B. |
-| `Trackingtag` | Str | `TDXMorphPath` | The tag written onto tracked nodes so they can be found after a move. |
+| `Trackingtag` | Str | `TDXMorphPath` | The tag written onto tracked nodes so they can be found after a move. Changing it re-tags every tracked node. |
 | `Importjson` / `Exportjson` | Pulse | | Load or save presets and paths as JSON. |
 
 ### Info (read only)
@@ -329,12 +329,12 @@ Store a preset from an explicit data block instead of from the current state. `d
 ```python
 SetPreset(name=None)
 ```
-Apply a stored preset's values immediately, with no interpolation. A morph in progress is stopped first, so the new values stick.
+Apply a stored preset's values immediately, with no interpolation. Falls back to the `Target` parameter when `name` is omitted. A morph in progress is stopped first, so the new values stick. A stored node or parameter that no longer exists is skipped and named in one report; everything else is still set.
 
 ```python
 DeletePreset(name=None)
 ```
-Delete a preset by name. Falls back to the `Presetname` parameter.
+Delete a preset by name. Falls back to the `Target` parameter.
 
 ```python
 ClearPresets(overwriteWarning=False)
@@ -390,13 +390,13 @@ Replace stored presets and paths with the given data, then refresh. This is the 
 ```python
 MorphPreset(presetName=None, morphTime=None, morphCurve=None)
 ```
-Morph from the current state to `presetName`. Without overrides, each track uses the timing stored in the preset. An explicit `morphTime` or `morphCurve` wins over the stored values for that call only, and does not persist into the session globals.
+Morph from the current state to `presetName`. Without overrides, each track uses the timing stored in the preset. An explicit `morphTime` or `morphCurve` wins over the stored values for that call only, and does not persist into the session globals. A stored node that no longer exists is skipped and named in one report; the rest still morphs.
 
 ```python
 SetRandom(mode=None)
 MorphRandom(mode=None)
 ```
-Randomize the targeted parameters, either instantly or through a morph. Both respect `AutoMode`, running a single step or a sequence of `NumMorphs`. A morph in progress is stopped first. `mode` picks the distribution for this call only, and an auto sequence keeps it for every step; to change it for good, set `Randomdistribution`.
+Randomize the targeted parameters, either instantly or through a morph. Both respect `AutoMode`, running a single step or a sequence of `NumMorphs`. A morph in progress is stopped first. `mode` picks the distribution for this call only, and an auto sequence keeps it for every step; to change it for good, set `Randomdistribution`. A Menu or StrMenu parameter gets one of its own items, drawn over the whole list. If a tracked node no longer exists, an auto random morph stops instead of starting.
 
 ```python
 PresetsSequence(sortKeys=False, keysSequence=None)
@@ -411,12 +411,12 @@ Load two presets into the engine tables for manual blending with `Blend`.
 ```python
 StopMorphing()
 ```
-Stop the active morph. Disarms every per-track cadence and resets the clock so the chain stops cooking.
+Stop the active morph. Disarms every per-track cadence and resets the clock so the chain stops cooking. A running morph or auto sequence ends here: `onMorphingEnd` fires with its type, and an auto sequence starts again from its first step.
 
 ```python
 PlayMorphing(play=True)
 ```
-Play or pause the morph clock.
+Pause (`False`) or resume (`True`) the running morph where it is. A resume continues from the point it froze. A new morph or `StopMorphing` ends a pause, and with no morph running a pause does nothing.
 
 ### State retrieval
 
@@ -519,7 +519,7 @@ def onPresetCall(presetManager, morphingType, presetName):
 	return
 ```
 
-`onMorphingStart` and `onMorphingEnd` fire for every morph, including random ones. With Multi-Track Engine on, a track in `loop` or `pingpong` never finishes, so `onMorphingEnd` (and anything chained to it, such as SceneLauncher follow actions) waits until the morph is stopped. `onPresetCall` fires only when a named preset is invoked, which is the hook you want for cueing and follow actions.
+`onMorphingStart` and `onMorphingEnd` fire for every morph, including random ones. `morphingType` is the type that started or ended (`onMorphingEnd` names the morph that just finished), and `presetName` is `'None'` for a random morph. Stopping a running morph or auto sequence also fires `onMorphingEnd`. With Multi-Track Engine on, a track in `loop` or `pingpong` never finishes, so `onMorphingEnd` (and anything chained to it, such as SceneLauncher follow actions) waits until the morph is stopped. `onPresetCall` fires only when a named preset is invoked, which is the hook you want for cueing and follow actions.
 
 ---
 
@@ -532,7 +532,7 @@ Curves are registered in `PresetMorpher/curveLib`, which also holds each curve's
 
 That is all **16** shapes the registry holds.
 
-Distributions come from `RandomGenerator`: `Uniform`, `Normal`, `Beta`.
+Distributions come from `RandomGenerator`: `Uniform`, `Normal`, `Beta`. All three stay inside the range they are given; `Normal` centres on its middle.
 
 ```python
 lib = op('PresetManager/PresetMorpher/curveLib').module

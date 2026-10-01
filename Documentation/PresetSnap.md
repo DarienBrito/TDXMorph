@@ -122,6 +122,8 @@ On the component itself.
 | `Attachpage` | Pulse | | Re-run the install by hand. |
 | `Removepage` | Pulse | | Remove the injected page from the host. |
 
+If the host already has a page called `Presets`, the tool adds its parameters to that page. Your own parameters on it are captured like any others, and removing the page takes off only the tool's parameters.
+
 ### About page
 
 The `Readme`, `Help`, `Support` and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
@@ -137,7 +139,7 @@ Four things are skipped on recall, and the tally is returned so a UI can report 
 | **Skipped** | **Why** |
 |---|---|
 | The row is not included | You turned it off in the editor. |
-| The parameter no longer resolves | It was renamed or deleted. The row is marked `missing` and kept. |
+| The parameter no longer resolves | It was renamed or deleted. The row is marked `missing` (shown as `gone`) and kept, still included. |
 | The parameter is not in constant mode | See below. |
 | The cell is empty | Nothing was ever captured for this preset. |
 
@@ -145,7 +147,11 @@ Four things are skipped on recall, and the tally is returned so a UI can report 
 
 The editor shows the mode next to every parameter, so you can see at a glance which rows a recall will actually write.
 
-A vanished parameter is marked, never deleted. It may come back, and its stored values are your data.
+A vanished parameter is marked, never deleted and never switched off. It may come back, and its stored values are your data: once it returns, the next rescan picks it up and a recall writes it again.
+
+Picking a preset in the host menu reports the result on the status bar, for example `A: set 5, 2 kept, 1 failed, 1 gone`: values written, rows kept because the parameter is not constant, values that would not apply, and parameters that are gone.
+
+A string menu takes a typed value that is not one of its items, and a recall writes it back as typed. A regular menu only accepts its own items.
 
 ---
 
@@ -161,12 +167,12 @@ An operator outside the host is refused. Its row would resolve today and dangle 
 
 ## What is never captured
 
-- **The page this component injects.** Capturing the preset selector would make a recall rewrite it mid-recall and re-enter.
+- **The parameters this component injects.** Capturing the preset selector would make a recall rewrite it mid-recall and re-enter.
 - **Pulses and momentaries.** They carry no state.
-- **Sequence parameters.** Out of scope for now: the block count can differ between store and recall.
+- **A sequence's block count.** The values inside each block are captured, one row per block parameter (a Constant CHOP stores `const0value`, `const1value` and so on). A recall onto fewer blocks reports the extra rows as gone.
 - **Anything inside the PresetSnap component itself.**
 
-If the host is a clone, the tool says so and declines to inject rather than writing a page that clone syncing would overwrite. Add PresetSnap to the clone master instead.
+If the host is a clone, whether its Clone parameter is a path or an expression, the tool says so on the status bar and declines to inject rather than writing a page that clone syncing would overwrite. Add PresetSnap to the clone master instead.
 
 ---
 
@@ -187,7 +193,7 @@ op('PresetSnap').FromJSON(text)
 
 `ToJSON` writes PresetSnap's own format: each preset maps a row token straight to its stored value, and the file is stamped as a PresetSnap file. `FromJSON` reads it back into any PresetSnap.
 
-It is not the [PresetManager](PresetManager.md) format, and the two do not convert. PresetManager, ParameterMorpher and SceneLauncher refuse a PresetSnap file and leave their own presets untouched.
+It is not the [PresetManager](PresetManager.md) format, and the two do not convert. PresetManager, ParameterMorpher and SceneLauncher refuse a PresetSnap file and leave their own presets untouched, and `FromJSON` refuses a file written by any of them, names the tool that wrote it on the status bar, and changes nothing.
 
 ---
 
@@ -251,7 +257,7 @@ Create the host page if missing and resync everything. Idempotent, and called fo
 ```python
 RemovePage()
 ```
-Remove the injected page from the host. Returns False when there was no page.
+Remove the injected parameters from the host, and the page once nothing else is on it. Returns False when there was no page.
 
 ```python
 OpenEditor()

@@ -86,8 +86,9 @@ The widget currently armed for learning, or None.
 ```python
 ArmRow(rowIndex)
 ```
-Arm an existing mapping for re-learn, so the next channel re-keys that row. A row whose parameter is
-driven is refused with the same note as a click.
+Arm an existing mapping for re-learn, so the next channel re-keys that row. The row keeps its range,
+takeover and place in the list. A row whose parameter is driven is refused with the same note as a
+click.
 
 ```python
 ArmedRowIndex()
@@ -120,7 +121,8 @@ SetMappingTakeover(rowIndex, mode)
 ```
 Set takeover to `'jump'`, which writes immediately, or `'pickup'`, which waits until the incoming
 control crosses the parameter's current value before taking over. A parameter outside the mapping's
-range is picked up at that end of the control's travel.
+range is picked up at that end of the control's travel, and a menu at its selected item. Pickup
+re-arms whenever something else moves the parameter after the control took over.
 
 ```python
 ToggleMappingTakeover(rowIndex)

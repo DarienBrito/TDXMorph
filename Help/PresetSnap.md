@@ -64,7 +64,8 @@ Rescan()
 ```
 Add rows for host parameters not yet listed, refresh every row's mode, and mark rows whose
 parameter no longer resolves. Returns `{'added': N, 'missing': N}`. A vanished parameter is marked
-and kept, never deleted: it may come back, and its stored values are the user's data.
+and kept, never deleted or switched off: it may come back, and its stored values are the user's
+data.
 
 ```python
 AddOp(opOrPath, pars=None)
@@ -84,13 +85,14 @@ Turn one row's capture flag on or off, by row token.
 Attach()
 ```
 Create the `Presets` page on the host if missing, then resync the menu and the rows. Idempotent by
-contract: it is called on drop and on every project load. Declines when the host is a clone, since
-clone syncing would overwrite the page.
+contract: it is called on drop and on every project load. Declines when the host is a clone, by a
+path or an expression, since clone syncing would overwrite the page, and says so on the status bar.
 
 ```python
 RemovePage()
 ```
-Remove the injected page. Returns False when there was no page. This is a real action rather than
+Remove the injected parameters, and the page once nothing else is on it. Returns False when there
+was no page. This is a real action rather than
 something that happens automatically, because an Execute operator has no destroy event and it sits
 inside the thing being deleted.
 
@@ -107,8 +109,9 @@ FromJSON(text)
 ```
 Export and import in PresetSnap's own format: each preset maps a row token to its stored value, and
 the file is stamped as a PresetSnap file. It is not the PresetManager format; PresetManager,
-ParameterMorpher and SceneLauncher refuse it and change nothing. `FromJSON` returns how many presets
-were read and uniquifies any name that already exists or is a header column name.
+ParameterMorpher and SceneLauncher refuse it and change nothing, and `FromJSON` refuses their files
+the same way. `FromJSON` returns how many presets were read, 0 on a refusal, and uniquifies any name
+that already exists or is a header column name.
 
 ## Editor
 

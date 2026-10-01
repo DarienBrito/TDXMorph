@@ -63,7 +63,7 @@ The tree fills with the stored presets. Double-click a value to edit it.
 | `Presetmanager` | OP | `PresetManager` | The PresetManager to read, in Preset manager mode. |
 | `Json` | File | `''` | The JSON file to read, in JSON file mode. |
 | `Editable` | Toggle | `On` | Allow editing values. Mirrored onto the embedded tree. |
-| `Search` | Str | `''` | Filter the tree. Forwarded to the tree's own filter. |
+| `Search` | Str | `''` | Filter the tree. Forwarded to the tree's own filter and shown in its search field. |
 | `Expandall` | Pulse | | Expand every branch. |
 | `Collapseall` | Pulse | | Collapse every branch. |
 

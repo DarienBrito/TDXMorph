@@ -147,13 +147,13 @@ One dict per column, returned from `ListViewColumns(lister)` or pushed with `Set
 ### Column kinds
 
 - **`text`** plain string.
-- **`value`** JSON-typed. Numbers, strings, booleans and null get their own colour, and an inline edit is coerced back to the old value's type.
+- **`value`** JSON-typed. Numbers, strings, booleans and null get their own colour, and an inline edit is coerced back to the old value's type. A whole number takes a typed fraction and becomes a decimal.
 - **`index`** an automatic 1-based row number that reads the rendered position, so it renumbers itself for free after a reorder. Needs no key in the row data.
 - **`icon`** a glyph button. Pair it with `action` or `raction`.
 - **`badge`** a small filled label.
 - **`swatch`** a colour chip, from an RGB value in the row.
 
-The spec is copied at build time. Per-key width, alignment and label overrides are stored on the component, so a user's drag-resize, rename or realign survives a refresh, a reload and a save.
+The spec is copied at build time. Per-key width, alignment and label overrides are stored on the component, so a user's drag-resize, rename or realign survives a refresh, a reload and a save. A column with no `key` keeps such a change only until the next rebuild, so give a column a key if its overrides should last.
 
 ---
 
@@ -165,7 +165,7 @@ A list of dicts keyed by the column keys:
 [{'name': 'intro', 'level': 0.4}, {'name': 'chorus', 'level': 1.0}]
 ```
 
-Carry a private id (for example `_key`) when you need stable host-side identity across reorders. The selected row index is stored on the component.
+Carry a private id in `_key` when you need stable identity across reorders and refreshes. The selected row index is stored on the component, and on rows with a `_key` it follows its row through `Refresh` and `SetRows` (and clears when the row is gone); without one it stays at the same position. A double-click is also told apart by `_key`, or by name and position when there is none.
 
 ---
 

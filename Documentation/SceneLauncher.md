@@ -279,7 +279,8 @@ the attached manager. Pick one.
 **Curve** and **Action** open on <kbd>Right Click</kbd> the same way: Curve chooses the
 interpolation shape, Action chooses the follow action that fires when the scene finishes:
 *None*, *Repeat*, *Previous*, *Next*, *First*, *Last*, *Any* (a random scene) or *Other* (a
-random scene other than this one).
+random scene other than this one). Target and Curve both start with *None*: a None target makes a
+script-only scene, and a None curve morphs with the preset's own curve.
 
 **Scene**, **Length**, **Delay** and **Script** are inline text cells instead: click and type.
 The **color** swatch and the trash icon are left-click buttons.
@@ -290,7 +291,8 @@ Curve, Action, Script, delete icon. Delay and Script are hidden unless `Enablede
 
 Note that editing a scene's **Length** or **Curve** also overwrites that value in the target
 preset's own stored data. This is destructive and deliberate, matching the behaviour of
-earlier versions: the scene is the authority on its own timing.
+earlier versions: the scene is the authority on its own timing. Picking *None* as the curve leaves
+the preset alone.
 
 ### 5. Launch it
 
@@ -299,7 +301,7 @@ Click the **launch icon** in the scene's row, the fourth column, just right of t
 That icon is the only thing that launches a scene. Double-clicking any other cell is
 deliberately inert, so editing a Curve or Action can never fire the scene by accident.
 
-A scene with a **Delay** waits that long before it morphs. The last launch wins: any new
+A scene with a **Delay** waits that long before it morphs and runs its Script. The last launch wins: any new
 launch (the launch icon, Go, a follow action or a Sequence step) cancels launches still
 waiting out their Delay, so delayed launches never stack.
 
@@ -307,7 +309,8 @@ A scene whose Target is *None*, or names a preset that no longer exists, starts 
 opens no dialog. Its Script still runs, and in a Sequence the launcher moves on to the next scene.
 
 Build up a few scenes, give them follow actions, and the launcher will run them as a cue
-list. `Totaldurationf` and `Totaldurations` on the **Info** page report the total.
+list. `Totaldurationf` and `Totaldurations` on the **Info** page report the total: every scene's
+Length plus its Delay.
 
 ### 6. Where to go next
 
@@ -430,10 +433,13 @@ component. None of these opens a dialog; a call that cannot be honoured returns 
   the attached `PresetManager`.
 
 - **`SetSceneCurve(name, curve)`**  
-  Sets a scene's morph curve. `False` on a curve the attached engine does not offer.
+  Sets a scene's morph curve. `'None'` makes the scene morph with its preset's own curve and leaves
+  that preset untouched. `False` on a curve the attached engine does not offer.
 
 - **`DeleteScene(name)`** / **`ClearScenes()`**  
-  Delete one scene, or all of them. `ClearScenes()` returns `True` even on an empty list.
+  Delete one scene, or all of them. `ClearScenes()` returns `True` even on an empty list. The
+  transport stays on the scene it was on; deleting that scene moves it to the next one, and
+  `ClearScenes()` puts it back at the start.
 
 - **`ReorderScenes(order)`**  
   Reorders scenes by current 0-based row indices, as `order[newRow] = oldRow`. Refuses
@@ -492,7 +498,8 @@ component. None of these opens a dialog; a call that cannot be honoured returns 
 - **`OnSourceAttached()`**  
   Re-derives both menus from the attached `PresetManager` and seats both readouts. Called when
   you set the `Presetmanager` parameter, and safe to call yourself after attaching one in
-  script.
+  script. A PresetManager too old to drive follow actions, Sequence and the progress bar (3.x)
+  is reported once: in a dialog when attached by hand, as a printed message from a script.
 
 - **`SetMorphCurve(name)`**  
   Writes the attached `PresetManager`'s morph curve by name. Returns `True` when the value moved,
@@ -562,7 +569,9 @@ They allow stepping through, randomizing, or looping scenes.
 
 - **`CreateAnimation()`**  
   Builds a `PresetAnimator` using all existing scenes and presets.  
-  Synthesizes presets with the scenes’ timing, delay, and curve data for animation playback.
+  One key per scene, in order, with the scene's length; a scene's Delay holds the previous scene
+  for that long. Scenes without a valid target are skipped, and with nothing to animate it is
+  refused and creates nothing.
 
 ---
 

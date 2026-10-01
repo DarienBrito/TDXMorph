@@ -88,7 +88,7 @@ Rename a scene, keeping its row position. `False` if `old` is unknown, or `new` 
 ```python
 SetSceneField(name, field, value)
 ```
-Set one editable field: `name`, `length`, `delay`, `target`, `curve`, `action`, `script`, `color`. `False` on an unknown scene or an unsupported field. Setting `length` or `curve` also overwrites that value inside the scene's target preset, exactly as editing the cell by hand does.
+Set one editable field: `name`, `length`, `delay`, `target`, `curve`, `action`, `script`, `color`. `False` on an unknown scene or an unsupported field. Setting `length` or `curve` also overwrites that value inside the scene's target preset, exactly as editing the cell by hand does. A curve of `'None'` leaves the preset alone.
 
 ```python
 SetSceneTarget(name, target)
@@ -98,17 +98,17 @@ Point a scene at a preset; `'None'` detaches it. `False` if the scene is unknown
 ```python
 SetSceneCurve(name, curve)
 ```
-Set a scene's morph curve. `False` on an unknown scene, or a curve the attached engine does not offer.
+Set a scene's morph curve. `'None'` makes the scene morph with its preset's own curve, and leaves that preset untouched. `False` on an unknown scene, or a curve the attached engine does not offer.
 
 ```python
 DeleteScene(name)
 ```
-Delete one scene. `False` if there is no such scene.
+Delete one scene. `False` if there is no such scene. The transport stays on the scene it was on; deleting that scene moves it to the next one.
 
 ```python
 ClearScenes()
 ```
-Delete every scene. Returns `True` even when the list was already empty.
+Delete every scene and put the transport back at the start. Returns `True` even when the list was already empty.
 
 ```python
 ReorderScenes(order)
@@ -179,7 +179,7 @@ Arm or disarm the follow action that runs when the current morph completes. A sc
 ```python
 EnableScripting(enable=True)
 ```
-Activate/Deactive scripting possibilities in the launcher.
+Show or hide the Script column in the scene list. It only hides the column: a stored script still runs when its scene launches.
 
 ```python
 ExportPresetsJSON()
@@ -324,7 +324,7 @@ Updates the COMP with total duration calculated from the sum of all scenes, incl
 ```python
 CreateAnimation()
 ```
-Creates an animation from the set of scenes in the SceneLauncher.
+Creates an animation from the set of scenes in the SceneLauncher: one key per scene, in order, with the scene's length, and a scene's Delay holds the previous scene for that long. Scenes without a valid target are skipped; with nothing to animate it is refused and creates nothing.
 
 ### Private
 

@@ -39,7 +39,7 @@ Ask before removing `paths`, then call `action(prune)`. When no preset stores th
 ```python
 Create(path, addTrackingTag=True, settings=None)
 ```
-Register a path: tag the node, store its tracking path and record its settings.
+Register a path: tag the node, store its tracking path and record its settings. Time, curve and a/b/c come from `settings` when it carries them, else from the manager's globals, so a moved path keeps its own timing.
 
 ```python
 Delete(path, storedSettings=True, ignoreWarning=False, prune=False)
@@ -117,6 +117,11 @@ ReportResult(msg, title)
 Launches a TDXMorph-formatted pop up window with the given message and title.
 
 ```python
+Retag(oldTag, newTag)
+```
+Move every tracked node from one tracking tag to another. The manager calls it when its `Trackingtag` parameter changes, so earlier paths are still found after a move.
+
+```python
 StandardPopDialog(text, title, buttons, callback, details=None, textEntry=False, escButton=2)
 StandardPopMenu(info, items, callback)
 ```
@@ -125,7 +130,7 @@ Open a standard pop-up dialog or menu wired to a callback. `escButton` is the 1-
 ```python
 Update()
 ```
-Rebuild the UI reference table and the editor from the stored paths.
+Redraw the paths editor from the stored paths.
 
 ### Private
 
