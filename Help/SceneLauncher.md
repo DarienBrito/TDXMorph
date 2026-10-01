@@ -174,7 +174,7 @@ numeric suffix. Returns `''` when sourceName does not exist.
 ```python
 EnableFollowActions(enable=True)
 ```
-Arm or disarm the follow action that runs when the current morph completes. A scene launch arms it; Stop disarms it.
+Arm or disarm the follow action that runs when the current morph completes. A scene launch arms it once its morph starts. Stop, a newer launch, or any other morph starting on the PresetManager disarms it, so only the scene's own morph fires its follow action.
 
 ```python
 EnableScripting(enable=True)

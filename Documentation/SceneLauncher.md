@@ -303,6 +303,9 @@ A scene with a **Delay** waits that long before it morphs. The last launch wins:
 launch (the launch icon, Go, a follow action or a Sequence step) cancels launches still
 waiting out their Delay, so delayed launches never stack.
 
+A scene whose Target is *None*, or names a preset that no longer exists, starts no morph and
+opens no dialog. Its Script still runs, and in a Sequence the launcher moves on to the next scene.
+
 Build up a few scenes, give them follow actions, and the launcher will run them as a cue
 list. `Totaldurationf` and `Totaldurations` on the **Info** page report the total.
 
@@ -508,7 +511,8 @@ component. None of these opens a dialog; a call that cannot be honoured returns 
 
 - **`EnableFollowActions(enable=True)`**  
   Arms or disarms the follow action that runs when the current morph completes. A scene launch
-  arms it; Stop disarms it.
+  arms it once its morph starts. Stop, a newer launch, or any other morph starting on the
+  PresetManager disarms it, so only the scene's own morph fires its follow action.
 
 - **`DelayedPresetTrigger(target, length, curve)`**  
   Executes a delayed preset morph, using the scene’s timing and curve.

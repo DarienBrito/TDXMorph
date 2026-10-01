@@ -59,6 +59,11 @@ MorphCurve = str
 Get/set the global morph curve by name.
 
 ```python
+MorphStarts = int (read only)
+```
+Counts every morph start this session. Read it before and after a call to tell whether a morph started, or later to tell whether another morph has started since.
+
+```python
 MorphTime = float
 ```
 Get/set the global morph duration in seconds.
