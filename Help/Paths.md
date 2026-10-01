@@ -89,7 +89,7 @@ Set one item to a value on every stored path.
 ```python
 OverwriteItem(path, item, val)
 ```
-Set one item on a single stored path.
+Set one item on a single stored path. Setting a different `curve` also resets that path's `a`, `b` and `c` to the new curve's defaults.
 
 ```python
 PresetsUsing(paths)

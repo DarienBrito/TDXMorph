@@ -75,6 +75,16 @@ AutoRandomMorph(mode=None)
 Move to N random states using morphing.
 
 ```python
+ClaimGlobalShape(curve=None)
+```
+Record that the PresetManager's Curve a/b/n now hold the shape for `curve` (default: the current curve). Call it after writing a custom shape from a script together with a new curve.
+
+```python
+GlobalShape()
+```
+The global curve shape (a, b, n) that belongs to the current curve: the Curve a/b/n parameters, or the curve's defaults when the curve was changed without its shape in the same frame.
+
+```python
 GetRandomizableParameters()
 GetStandardParameters()
 ```

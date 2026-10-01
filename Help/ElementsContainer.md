@@ -31,6 +31,11 @@ ChangePresetsNum(newVal)
 Sets the number of presets in the Elements container to newVal.
 
 ```python
+ClaimElementShape(settings, curve=None)
+```
+Record that an element's `MorphSettings` Curve a/b/n hold the shape for `curve` (default: its current curve). Until then, an element whose curve changed in this frame stores and morphs with that curve's default shape.
+
+```python
 ClearParameters()
 ```
 Deletes all elements in the ElementsContainer, after a confirmation, and removes their stored values from every preset. The confirmation says how many presets that affects.

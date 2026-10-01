@@ -124,7 +124,7 @@ op('PresetManager').MorphPreset('intro')
 | `Overwritepreset` | Pulse | | Re-store the target preset from the current parameter values. |
 | `Morphtime` | Float | `2.0` | Global morph duration in seconds. |
 | `Morphcurve` | Menu | `Linear` | Global interpolation curve. |
-| `Curvea` / `Curveb` / `Curven` | Float | `0.0` / `1.0` / `1.0` | Shape coefficients for the selected curve. |
+| `Curvea` / `Curveb` / `Curven` | Float | `0.0` / `1.0` / `1.0` | Shape coefficients for the selected curve. Picking a new curve resets them to that curve's defaults; a curve always morphs and stores with its own shape, even when a script changes `Morphcurve` and morphs in the same frame. |
 | `Randomdistribution` | Menu | `Uniform` | Distribution used for random values. |
 | `Setrandom` | Pulse | | Jump every targeted parameter to a new random state. |
 | `Morphrandom` | Pulse | | Morph every targeted parameter toward a new random state. |
