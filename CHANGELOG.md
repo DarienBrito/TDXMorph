@@ -7,12 +7,158 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.2.1] (3rd quarter of 2026)
+## [Open Toolkit 4.3.0] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.3.0**, PresetSnap **1.2.1**,
-ControlMapper **1.0.5**, PresetInspector **1.5.5**, JSONTree **1.5.5**, ListView **1.0.8**.
+Current component versions on this line: PresetManager **4.4.0**, PresetSnap **1.3.0**,
+ControlMapper **1.1.0**, PresetInspector **1.5.6**, JSONTree **1.5.6**, ListView **1.0.9**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+The release audit: every component was reviewed ahead of the TDXMorph 4 release. Items marked
+**Behaviour change** alter what an existing setup does, not only what a broken one does. PresetManager, JSONTree and
+PresetInspector now read and write files as UTF-8, so non-ASCII names survive and a file saved with
+a BOM (Notepad) loads.
+
+### PresetManager 4.4.0
+
+Morphing:
+
+- **A morph with nothing to interpolate ends.** With only Int, Toggle or Menu parameters tracked,
+  with Lock on, or on a fresh engine in Automode, the morph never completed and the clock ran forever.
+- **Pause works.** `PlayMorphing(False)` freezes the running morph where it is and
+  `PlayMorphing(True)` continues from there. A new morph or Stop ends a pause. **Behaviour change:**
+  `PlayMorphing` no longer touches the clock's `play` flag.
+- **Stop ends the morph properly.** It fires `onMorphingEnd` for a running morph or auto sequence
+  (also between two steps), and an auto sequence starts again from its first step. `onMorphingEnd`
+  reports the type that ended instead of `None`, and a random morph reports `None` as its preset name.
+  **Behaviour change:** callbacks see `onMorphingEnd` on Stop, on Set and Set Random during a morph,
+  and on turning Blend Active on during one.
+- **Set and Set Random during a running morph stick.** The morph's next frame used to overwrite them;
+  both now stop the morph first.
+- **Automode and Presets Sequence keep going with Multitrack on.** They stopped after one step.
+- **The live Lock decides a preset morph.** A preset stored with Lock on, recalled with Lock off,
+  jumped to the target and slid to 0.0. The stored lock is no longer read, and Store no longer saves
+  it. **Behaviour change:** with Lock on, a preset morph also leaves Menu, Toggle and Int values alone.
+- **A preset's stored end mode applies on recall.** **Behaviour change:** with Multitrack on, a preset
+  whose tracks were stored as `loop` or `pingpong` keeps looping after recall, so it no longer fires
+  its morph end by itself. Presets with no stored end mode still hold.
+- **A curve always morphs with its own shape.** A curve passed to `MorphPreset` with Multitrack off
+  used the preset's stored shape, so Easein, Easeout and Exponentialeasing finished within a few
+  frames (every SceneLauncher launch passes one). A script that set `Morphcurve` and then stored or
+  morphed in the same frame used the previous curve's shape. Both now use the new curve's defaults,
+  and a shape you tune afterwards is kept. New: `PresetMorpher.GlobalShape()` and
+  `ClaimGlobalShape(curve)`.
+- **What you pass to one call stays with that call.** A `morphTime` or `morphCurve` passed to
+  `MorphPreset`, and a `mode` passed to `SetRandom`, `MorphRandom`, `MorphTrack` and the other random
+  calls, used to overwrite Morph Time, Morph Curve or Random Distribution for good. An auto sequence
+  started with a `mode` keeps it for all its steps. **Behaviour change:** set `Morphtime`,
+  `Morphcurve` or `Randomdistribution` to change the settings themselves.
+- **Manual blending no longer changes your morph settings.** Turning Blend Active on left the second
+  preset's time, curve, distribution and per-track timing on the session.
+- **Random values stay valid.** `Normal` could land outside the range (about 1 draw in 22). A StrMenu
+  got a number instead of one of its items, and a Menu only reached its first two items.
+- **A deleted node no longer opens a blocking dialog.** Morph and Set skip a node or parameter you
+  deleted, name it in one report and still morph or set the rest. Automode Morph Random reports it and
+  starts nothing, and one deleted node no longer stops every per-track cadence. **Behaviour change:**
+  the dialog no longer offers to remove the path; Delete or Clear in the Paths editor does that.
+- **Set Random after a stopped morph keeps its values** with Automode on.
+- **Overwriting a preset value reaches the morph.** `OverwriteSinglePresetValue` and
+  `OverwritePresetsValue` never wrote the global block a morph reads with Multitrack off, so a
+  SceneLauncher Length or Curve edit changed nothing. A new curve also re-seeds its shape.
+- **`SetPreset()` and `DeletePreset()` with no name act on Target**, as the Set and Delete pulses do.
+- **New: `MorphStarts`**, a read-only count of morph starts, so a caller can tell whether its own
+  morph started and whether another has started since.
+
+Paths:
+
+- **Deleting or clearing paths asks what to do with the presets that store them:** Keep (the old
+  behaviour, on Enter), Remove (drop their values from every preset) or Cancel (on Esc).
+  **Behaviour change:** Clear's confirm is now non-blocking like Delete's, so `Paths.Clear()` without
+  `overwriteWarning=True` returns before the paths are cleared. New: `Delete(..., prune=False)`,
+  `Clear(..., prune=False)`, `PresetsUsing(paths)`, `PruneFromPresets(paths)`, `ConfirmRemove(...)`
+  and an `escButton` argument on `StandardPopDialog`.
+- **Editing a path can no longer lose data.** An edit onto a path with no operator, or one already
+  tracked, is refused and reported. A valid edit moves the tracking to the new node.
+- **A Filter that matches nothing skips only its own path** and names it, instead of making every
+  Store a silent no-op and every morph abort. A Filter that is not a valid regex (such as `*`) reads
+  as a wildcard. **Behaviour change:** Store is partial on such a path, not all-or-nothing.
+- **Copying a tracked node no longer steals its tracking.** Copies are ignored; a plain move or
+  rename is still followed, and Update Paths keeps a moved path's own time, curve and shape.
+- **Picking a curve for a path resets its a/b/c** to that curve's defaults. **Behaviour change:**
+  `Paths.OverwriteItem(path, 'curve', ...)` re-seeds a/b/c when the curve changes; setting the same
+  curve keeps a tuned shape.
+- **The Paths editor follows Import JSON and Update Paths**, and a drag in an out-of-date editor no
+  longer deletes the paths it was not showing.
+- **Changing Tracking Tag keeps the moves tracked.** New: `Paths.Retag(oldTag, newTag)`.
+
+Files:
+
+- **Importing a PresetSnap export can no longer wipe everything.** A file stamped by another tool is
+  refused, and an unstamped file of the wrong shape is refused before anything is cleared. New:
+  `importFile(fileName)`; `ImportJSON` keeps the file dialog.
+- **Preset files from builds before 3.2 morph and set after import.**
+- **Import names the paths that point at nothing** in this project.
+
+### PresetSnap 1.3.0
+
+- **A preset named `param`, `include` or `mode` no longer overwrites the table.** Those are the
+  table's own column names; such a name now becomes `param 2` and so on.
+- **A host page you already called `Presets` keeps your parameters.** They are captured like any
+  other, and Remove Page takes off only PresetSnap's own controls.
+- **Behaviour change: a parameter missing at a rescan stays included.** It is marked `gone` and kept
+  on, and the next rescan after it returns picks it up. It used to be switched off for good.
+- **A StrMenu parameter recalls a typed value** that is not one of its menu items.
+- **The status line says more.** Refusals (a clone host, no host, a refused import) show there, and a
+  recall counts what failed and what is gone, for example `A: set 5, 1 failed, 2 gone`.
+- **A host cloned by an expression is refused** like any clone, so clone-sync cannot wipe the page.
+- **Importing another TDXMorph tool's file is refused**, naming the tool that wrote it. PresetSnap
+  files from before 1.2.0 still load.
+- **Rescan is faster on large hosts.**
+- **Docs corrected:** values inside a sequence are captured (each block's values, such as
+  `const0value`); only the block count is not.
+- Its parameter editor carries the ListView 1.0.9 fixes.
+
+### ControlMapper 1.1.0
+
+ParameterMorpher and SceneLauncher carry these through their embedded copy.
+
+- **Pickup works on a parameter outside the mapping's range.** It never engaged; it now engages when
+  the control reaches that end of its travel.
+- **Behaviour change: pickup re-arms when something else moves the parameter.** After a preset
+  recall, a morph or a hand edit, the control waits until it reaches the new value instead of
+  jumping the parameter back.
+- **Pickup works on a menu**, waiting for the control to reach the selected item.
+- **Re-learning a mapping keeps its range, takeover and place in the list**, and only takes the new
+  channel.
+- Its mapping editor carries the ListView 1.0.9 fixes.
+
+### ListView 1.0.9
+
+Every component that embeds a ListView carries these.
+
+- **The selection stays on its row when the rows change.** Rows with a `_key` keep their selection by
+  key through `Refresh` and `SetRows`. Rows without a `_key` behave as before.
+- **A column without a key keeps its own width, alignment and label** until the next rebuild, instead
+  of passing them to every other keyless column. Give the column a `key` to keep a change.
+- **Two rows with the same name are no longer one row for a double-click.**
+- **A whole-number value cell accepts a fraction**, and the value becomes a decimal.
+
+### JSONTree 1.5.6
+
+- **Editing a file keeps its non-ASCII text.** A name like `café ✓` came back as `cafÃ© âœ“`.
+- **A chosen skin survives reopening the project.** Hand-edited Look colours are not touched.
+- **A saved search filters the tree on reopen.**
+- **A whole-number value accepts a fraction**; a whole number typed over an integer stays an integer.
+- **One edit parses the tree once** instead of up to three times.
+
+### PresetInspector 1.5.6
+
+Carries the JSONTree 1.5.6 fixes, and **the inspector's Search shows in the tree's search field**.
+
+## [Open Toolkit 4.2.1] (3rd quarter of 2026)
+
+PresetManager **4.3.0**, PresetSnap **1.2.1**, ControlMapper **1.0.5**, PresetInspector **1.5.5**,
+JSONTree **1.5.5**, ListView **1.0.8**.
 
 A new free component, per-preset timing in PresetManager, and a text rendering fix in ListView
 that reaches every component embedding it.

@@ -19,6 +19,106 @@ Copyright © 2020–2026
 
 ---
 
+## 4.18.0
+
+The release audit. Items marked **Behaviour change** alter what an existing setup does, not only
+what a broken one does. Several come from the embedded PresetManager engine (4.4.0, see the
+[changelog](../CHANGELOG.md)).
+
+Moving, saving and wiring:
+
+- **Renaming, moving or copying the tool or a container no longer breaks it.** Every Store,
+  Randomize and Morph stopped behind a "nodes have moved" message, and a copy drove the original's
+  parameters. A container now keeps its data on its own elements, straight after a rename or copy
+  and when the project opens. Containers from earlier versions heal on the next open.
+- **Container callbacks fire again.** Since 4.14.0, `onMorphingStart`, `onMorphingEnd` and
+  `onPresetCall` never ran. Containers saved that way are repaired when the project opens. The first
+  argument is now the ElementsContainer itself, and a blank callbacks parameter is ignored.
+- **The Transport input works.** Beat, Bar and Sixteenths sync, per-element Quantize and the header's
+  BPM display were all dead. Sync factors above 1 now step evenly.
+
+Presets and morphing:
+
+- **An element's own Lock decides a preset morph when you recall it.** The lock stored in the preset
+  is kept for display only.
+- **An element's End Mode applies on preset recall.** **Behaviour change:** with Multitrack on, an
+  element set to `loop` or `pingpong` when the preset was stored keeps looping after recall.
+- **Deleting an element removes its values from every preset**, and the confirm says how many. Each
+  later Set or Morph of such a preset used to stop on a modal. **Behaviour change:** there is no keep
+  option.
+- **Pause holds a running morph, and Stop fires `onMorphingEnd`** with the type that ended.
+  **Behaviour change:** a container's `onMorphingEnd` now also fires on Stop.
+- **A morph with nothing to interpolate ends, and Set and Set Random during a morph stick.**
+- **A deleted target is skipped and reported** instead of opening a blocking dialog, and a
+  hand-deleted target no longer stops every per-element auto cadence.
+- **A Filter that matches nothing skips only its own path**, a copied tracked node no longer steals
+  its tracking, and a path moved onto an invalid or already tracked node is refused.
+- **Random values reach the whole menu.** A random StrMenu element gets one of its items instead of a
+  number, and a Menu element reaches its whole list.
+- **An element's Distribution no longer changes the container's.**
+- **A MIDI/OSC-mapped preset morphs on the timing you chose** right after switching Global timing.
+- **Ctrl+click leaves locked elements alone**, as a plain click does.
+- **An element's curve always morphs with its own shape**, also when a script sets the curve and
+  stores or morphs in the same frame. New: `ClaimElementShape(settings, curve)`.
+- **Changing the number of preset slots keeps an Alt+drag swap.** **Behaviour change.**
+- **Rename presets in order keeps the lit preset and Blend A/B on the same presets**, and a preset
+  button's hover text describes the preset it triggers after an Alt+drag swap.
+- **The container's own Clear presets and Delete pulses work**, asking first like the panel buttons.
+  **Behaviour change.**
+
+Elements:
+
+- **Reset puts a slider's range back everywhere**: on the element, the slider you drag and the
+  signal settings. Reset on a Menu or StrMenu element keeps one slot per item, so Randomize after
+  Reset all reaches every item again.
+- **A value set right after creating an element sticks** for sliders and toggles. A menu element
+  still re-applies its original value, so wait 15 frames before setting a new menu element from a
+  script. **Behaviour change** for scripts that relied on the revert.
+- **A node dropped on an element row adds elements**, as a drop on the empty area does. Dragging one
+  element onto another still reorders them. **Behaviour change.**
+- **Header > Channels labels every channel**: one channel per element, named after it.
+- **Set random per element no longer raises** after an element is deleted by hand.
+- **Element API fixes.** `GetPresetsManager()` returns the container's PresetManager on both element
+  kinds, and `EditCustomName(name)` works. The non-interpolating element's `Distribution` and `Snap`
+  are removed. **Behaviour change** for scripts only.
+- **Scripted preset slots must be whole numbers from 1** (`2.0` still means slot 2). **Behaviour
+  change** for scripts only: other values give a warning.
+- **`ExportPresetManager()` is removed.** It raised every time. **Behaviour change** for scripts
+  only: use the standalone PresetManager.
+- **`HardSyncLFOs()` works.**
+- **Importing a container file or dropping a node is faster with many elements.**
+
+Signals and patterns:
+
+- **Pattern signals step only when they should.** Editing any signal setting no longer steps every
+  pattern, expanding an editor no longer restarts them, and Manual Trigger steps a pattern once.
+- **Signals cost less per frame.** Settings are parsed once when a signal changes; output is
+  identical.
+- **A Timeline-synced Once holds its end value.**
+- **`SetPwrand(sequence)` without weights gives every value equal odds**, and a mismatched count is
+  refused with a message giving both counts.
+- **`SetPwhite(0, 1)` draws between the bounds** instead of picking only 0 or 1.
+- **Pattern sequences accept commas, semicolons or brackets**, and a value that is not a number is
+  refused with a message. Opening a pattern editor no longer pops a message for stored values it
+  cannot play.
+- **The PresetAnimator keeps every key on one timeline**, skips an unknown name in the presets
+  sequence, accepts hyphens in names and skips a target deleted after the animation was made.
+
+Files:
+
+- **Container import and export use UTF-8.**
+- **A container file from before 4.0 imports and plays.**
+- **The engine's Import JSON and Export JSON go through the container**, so they no longer orphan
+  every element.
+- **Importing a PresetSnap export is refused** instead of wiping the embedded PresetManager, and a
+  PresetManager or SceneLauncher file says why it cannot be imported.
+- **Preset files from before 3.2 morph and set after import, and overwriting a preset value reaches
+  the morph.**
+- In the embedded ControlMapper, a `pickup` mapping on a parameter outside its range engages at the
+  end of the control's travel instead of never.
+
+---
+
 ## 4.17.6
 
 - Maintenance re-export. No change to how the component behaves.

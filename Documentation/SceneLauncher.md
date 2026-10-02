@@ -16,6 +16,59 @@ Copyright © 2020–2026
 
 ---
 
+## 4.11.0
+
+The release audit. Items marked **Behaviour change** alter what an existing setup does, not only
+what a broken one does. Some fixes live in the attached PresetManager and need PresetManager 4.4.0.
+
+- **Stop stops everything SceneLauncher started.** The follow action is disarmed, the Sequence ends
+  and a step waiting out its Delay is cancelled.
+- **Only a scene's own morph fires its follow action.** Another morph cutting in (the Morph button, an
+  ElementsContainer, a script) used to fire it and launch the next scene. Needs PresetManager 4.4.0;
+  an older one keeps the previous behaviour.
+- **The last launch wins.** Any new launch cancels launches still waiting out their Delay.
+  **Behaviour change:** delayed launches no longer stack.
+- **A scene's Script runs after its Delay**, with the morph, and a newer launch or Stop cancels it.
+  **Behaviour change.**
+- **Pause works, and pausing a Sequence no longer ends it.** Pause holds the running morph (fixed in
+  PresetManager 4.4.0). Play/Pause shows playing again when a launch, Stop, Randomize or Interpolate
+  ends the pause, without calling your `onAction`.
+- **A refused import no longer deletes your scenes.** The file is checked and its presets go to the
+  PresetManager before any scene is replaced.
+- **A scene with no target, or a deleted one, starts nothing and opens no dialog.** Its Script still
+  runs and a Sequence moves on. **Behaviour change:** Go on a scene aimed at a deleted preset is
+  silent.
+- **Target and Curve can be set back to None.** A None target makes a script-only scene; a None curve
+  morphs with the preset's own curve and no longer writes into the preset.
+- **Launching a scene no longer changes the PresetManager's Morph Time and Morph Curve.**
+  **Behaviour change:** the CURVE readout shows the PresetManager's curve, not the last scene's.
+- **A scene on Easein, Easeout or Exponentialeasing no longer jumps to its target**, and Sigmoid,
+  Quadratic and OddPolynomial scenes are no longer distorted.
+- **A scene's Length or Curve edit reaches the morph** with Multitrack off.
+- **Your callbacks get the SceneLauncher and the real scene.** **Behaviour change:** the first
+  argument of `onSceneLaunch` and `onAction` is the SceneLauncher component. `info['target']`
+  carries the scene's preset, each Sequence step fires `onSceneLaunch`, and picking a scene's colour
+  no longer selects it.
+- **Deleting a scene keeps the transport on the scene it was on.** Clear scenes and an import put it
+  back at the start, and a finished Sequence stays on its last scene.
+- **Duplicating a scene never overwrites another.** A taken name gets a numeric suffix, and
+  `DuplicateScene` returns the name it got.
+- **Deleting or renaming a preset keeps the PresetManager's Target menu true.**
+- **A preset name with a quote or a backslash launches.**
+- **Create Animation follows your scene list.** **Behaviour change:** every scene gets its own key,
+  and a scene's Delay holds the previous scene. Scenes without a valid target are skipped, and the
+  animation keeps its timing.
+- **Totaldurations counts the Delays.** **Behaviour change.**
+- **A PresetManager 3.x is reported when attached**, since follow actions, Sequence and the progress
+  bar never ran with it.
+- **Scene import and export use UTF-8**, and importing a PresetSnap export into the PresetManager is
+  refused instead of wiping it.
+- **SceneLauncher ships with no scenes.** 4.10.1 carried a leftover scene, `A`.
+- **Nothing cooks while SceneLauncher is idle**, and long unattended shows no longer pile up finished
+  launches.
+- In the embedded ControlMapper, a `pickup` mapping on a parameter outside its range engages at the
+  end of the control's travel instead of never.
+
 ## 4.10.1
 
 - **A parameter driven by an expression or an export can no longer be mapped.** A mapping writes
