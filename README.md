@@ -10,6 +10,9 @@
 > The morphing engine was substantially rewritten and the free tier grew from one component to six.
 > Presets written by older versions migrate automatically, but **back up your project and export your
 > presets before upgrading** from 3.2.1.
+>
+> TDXMorph 4 is an **alpha**. Every component has been through a full audit and a beta, but bugs are
+> still possible, so please [report](#support-and-feedback) anything you find.
 
 ## What it is
 
@@ -50,7 +53,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 
 ## Install
 
-Built and tested on TouchDesigner 2025.33070.
+Built and tested on TouchDesigner 2025.33230.
 
 1. Drag the `.tox` into your TouchDesigner network, or use **File > Import > Component**.
 2. Click the component's viewer to open its panel.
