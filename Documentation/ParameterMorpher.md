@@ -25,6 +25,7 @@ Copyright © 2020–2026
   animation, with cooking left on. **Create Animation** builds it on first use, as before.
 - The element templates and the Preset Animator no longer carry values from a development session,
   and the embedded morph engine ships with no state from its last run. Nothing changes in use.
+- Unused internal templates and leftover expression text are gone. Nothing changes in use.
 
 ## 4.18.0
 

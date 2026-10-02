@@ -2,13 +2,10 @@ This is the prototype class for all local Elements, which are based on TDXMorphs
 
 1. TDXMorphFloat
 1. TDXMorphButton
-1. TDXMorphCheckbox
-1. TDXMorphButtonPopUp
 1. TDXMorphSlider
 1. TDXMorphToggle
 1. TDXMorphMenu
 1. TDXMorphField
-1. TDXMorphStringMenu
 
 Each one of this has slight variations of this prototype class to fit their local types. The properties here defined are mainly used by the OSC and MIDI Mappers. The prototype is defined as follows:
 
