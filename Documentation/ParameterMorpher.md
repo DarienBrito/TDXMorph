@@ -23,6 +23,8 @@ Copyright © 2020–2026
 
 - The Preset Animator ships with no animation. It carried the channels and keys of an old demo
   animation, with cooking left on. **Create Animation** builds it on first use, as before.
+- The element templates no longer carry values from a development session, and the embedded morph
+  engine ships with no state from its last run. Nothing changes in use.
 
 ## 4.18.0
 

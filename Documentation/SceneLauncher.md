@@ -19,6 +19,7 @@ Copyright © 2020–2026
 ## 4.11.1
 
 - The Preset Animator's duration readouts ship at 0 instead of a value left over from development.
+- A placeholder tooltip on an internal button template is gone.
 
 ## 4.11.0
 

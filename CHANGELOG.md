@@ -7,12 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.2] (4th quarter of 2026)
+## [Open Toolkit 4.3.3] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.4.1**, PresetSnap **1.3.0**,
+Current component versions on this line: PresetManager **4.4.2**, PresetSnap **1.3.0**,
 ControlMapper **1.1.0**, PresetInspector **1.5.7**, JSONTree **1.5.6**, ListView **1.0.9**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### PresetManager 4.4.2
+
+- The morph engine ships with no state left from its last run.
+- The Paths editor no longer carries two unused parameter pages left from the Lister it replaced.
+- Nothing changes in use.
+
+## [Open Toolkit 4.3.2] (4th quarter of 2026)
+
+PresetManager **4.4.1**, PresetSnap **1.3.0**, ControlMapper **1.1.0**, PresetInspector **1.5.7**,
+JSONTree **1.5.6**, ListView **1.0.9**.
 
 ### PresetManager 4.4.1
 
