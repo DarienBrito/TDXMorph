@@ -3,7 +3,7 @@
 A viewer and value editor for preset data. Attaches to a PresetManager, or reads any JSON
 file. A thin wrapper around an embedded [JSONTree](JSONTree.md).
 
-Version 1.5.6. MIT. Capitalized methods are promoted and are the supported API.
+Version 1.5.7. MIT. Capitalized methods are promoted and are the supported API.
 
 Full reference: [Documentation/PresetInspector.md](../Documentation/PresetInspector.md).
 
@@ -21,7 +21,7 @@ The data source: `Preset manager` or `JSON file`.
 ```python
 Presetmanager = OP
 ```
-The PresetManager to read in Preset manager mode. Defaults to the sibling name `PresetManager`.
+The PresetManager to read in Preset manager mode. Empty by default.
 
 ```python
 Json = str

@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.5.6
+**Version:** 1.5.7
 
 ---
 
@@ -47,7 +47,7 @@ The data path is `eval1` or `filein1`, then `switch1`, then the embedded `JSONTr
 
 1. Drop `PresetInspector.tox` next to a PresetManager.
 2. Leave `Mode` on **Preset manager**.
-3. Set `Presetmanager` to your PresetManager component. The default is the sibling name `PresetManager`, so if the two sit side by side it works with no configuration at all.
+3. Set `Presetmanager` to your PresetManager component. It starts empty, so the Inspector shows nothing until you point it at one.
 
 The tree fills with the stored presets. Double-click a value to edit it.
 
@@ -60,7 +60,7 @@ The tree fills with the stored presets. Double-click a value to edit it.
 | **Parameter** | **Type** | **Default** | **Description** |
 |---|---|---|---|
 | `Mode` | Menu | `Preset manager` | The data source: an attached PresetManager, or a JSON file. |
-| `Presetmanager` | OP | `PresetManager` | The PresetManager to read, in Preset manager mode. |
+| `Presetmanager` | OP | *(empty)* | The PresetManager to read, in Preset manager mode. |
 | `Json` | File | `''` | The JSON file to read, in JSON file mode. |
 | `Editable` | Toggle | `On` | Allow editing values. Mirrored onto the embedded tree. |
 | `Search` | Str | `''` | Filter the tree. Forwarded to the tree's own filter and shown in its search field. |

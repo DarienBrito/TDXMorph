@@ -7,12 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.0] (4th quarter of 2026)
+## [Open Toolkit 4.3.1] (4th quarter of 2026)
 
 Current component versions on this line: PresetManager **4.4.0**, PresetSnap **1.3.0**,
-ControlMapper **1.1.0**, PresetInspector **1.5.6**, JSONTree **1.5.6**, ListView **1.0.9**.
+ControlMapper **1.1.0**, PresetInspector **1.5.7**, JSONTree **1.5.6**, ListView **1.0.9**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### PresetInspector 1.5.7
+
+- **Behaviour change: `Presetmanager` starts empty.** It defaulted to the name `PresetManager`, so a
+  fresh PresetInspector attached itself to any sibling called that. It now starts unattached, like every
+  other TDXMorph component; point it at a PresetManager yourself.
+
+## [Open Toolkit 4.3.0] (4th quarter of 2026)
+
+PresetManager **4.4.0**, PresetSnap **1.3.0**, ControlMapper **1.1.0**, PresetInspector **1.5.6**,
+JSONTree **1.5.6**, ListView **1.0.9**.
 
 The release audit: every component was reviewed ahead of the TDXMorph 4 release. Items marked
 **Behaviour change** alter what an existing setup does, not only what a broken one does. PresetManager, JSONTree and
