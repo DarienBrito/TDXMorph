@@ -3,7 +3,7 @@
 The root of the SceneLauncher component. Manages scenes, their preset lists and the
 playback of both, driving an external PresetManager.
 
-Class: `extSceneLauncher`. Version 4.10.1.
+Class: `extSceneLauncher`. Version 4.11.0.
 
 > **PROPRIETARY. Licensed, not sold.** A commercial component governed by the
 > SceneLauncher EULA (see the `LICENSE` operator inside the component). Available

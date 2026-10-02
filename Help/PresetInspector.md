@@ -3,7 +3,7 @@
 A viewer and value editor for preset data. Attaches to a PresetManager, or reads any JSON
 file. A thin wrapper around an embedded [JSONTree](JSONTree.md).
 
-Version 1.5.5. MIT. Capitalized methods are promoted and are the supported API.
+Version 1.5.6. MIT. Capitalized methods are promoted and are the supported API.
 
 Full reference: [Documentation/PresetInspector.md](../Documentation/PresetInspector.md).
 

@@ -3,7 +3,7 @@
 A reusable flat-columnar list widget built on the native `listCOMP`. Shipped standalone and
 used internally by the PresetManager paths editor.
 
-Version 1.0.8. MIT. Capitalized methods are promoted and are the supported API.
+Version 1.0.9. MIT. Capitalized methods are promoted and are the supported API.
 
 Full reference: [Documentation/ListView.md](../Documentation/ListView.md).
 

@@ -6,7 +6,7 @@ engine. Drop the `.tox` into a base or container and a `Presets` page appears on
 **Headless.** The component is a base COMP with no panel: the seven parameters it injects onto the
 host are the interface, and the parameter editor opens in its own window.
 
-Class: `extPresetSnap`. Version 1.2.1. MIT licensed, and shipped standalone in this repository.
+Class: `extPresetSnap`. Version 1.3.0. MIT licensed, and shipped standalone in this repository.
 
 Full guide: [PresetSnap](../Documentation/PresetSnap.md).
 
