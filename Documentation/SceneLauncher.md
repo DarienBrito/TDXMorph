@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.11.0
+**Version:** 4.11.1
 
 > SceneLauncher is a **commercial** component of the TDXMorph toolkit, governed by the
 > SceneLauncher EULA (see the `LICENSE` operator inside the component). No redistribution,
@@ -15,6 +15,10 @@ Copyright © 2020–2026
 > documentation only.
 
 ---
+
+## 4.11.1
+
+- The Preset Animator's duration readouts ship at 0 instead of a value left over from development.
 
 ## 4.11.0
 

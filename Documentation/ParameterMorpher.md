@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.18.0
+**Version:** 4.18.1
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). No
@@ -18,6 +18,11 @@ Copyright © 2020–2026
 > keep their own MIT licence.
 
 ---
+
+## 4.18.1
+
+- The Preset Animator ships with no animation. It carried the channels and keys of an old demo
+  animation, with cooking left on. **Create Animation** builds it on first use, as before.
 
 ## 4.18.0
 

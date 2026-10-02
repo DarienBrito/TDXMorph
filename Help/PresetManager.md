@@ -3,7 +3,7 @@
 The heart of TDXMorph. This class stores and retrieves presets, and drives the morpher and
 random distribution nodes.
 
-Version 4.4.0. Capitalized methods are promoted and are the supported API. Lowercase
+Version 4.4.1. Capitalized methods are promoted and are the supported API. Lowercase
 methods are internal and may change between versions.
 
 For the full reference, including the preset schema, the multi-track engine and the
