@@ -29,14 +29,14 @@ The signals currently in the table, that is, the elements whose `Enablesignal` i
 ```python
 Rebuild()
 ```
-Rewrite the signal table from the live model and re-cache the write targets. Called
-automatically when any of the fifteen signal parameters changes.
+Rewrite the signal table from the live model, parse each signal's settings once and re-cache
+the write targets. Called automatically when any of the fifteen signal parameters changes.
 
 ```python
 Generate(scriptOp)
 ```
-Cook one sample per active signal. Driven by the service clock, so it stops when the table
-empties.
+Cook one sample per active signal from the settings parsed at the last `Rebuild`, without reading
+the table. Driven by the service clock, so it stops when the table empties.
 
 ```python
 RefreshPatterns()

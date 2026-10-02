@@ -535,7 +535,8 @@ They allow stepping through, randomizing, or looping scenes.
   Handles the timing and triggering of sequential scene transitions.
 
 - **`PerformAction(action, value=None)`**  
-  Triggers an action from the transport menu (e.g., *Next*, *Stop*, *Repeat*).
+  Triggers an action from the transport menu (e.g., *Next*, *Stop*, *Repeat*). A launch, Stop,
+  Randomize or Interpolate ends a pause, and the Play/Pause button returns to playing by itself.
 
 ---
 

@@ -36,7 +36,7 @@ Reorder widgets.
 ```python
 SetDefaultValue()
 ```
-Set the slider to the range and value found on creation (original value on dragging of parameter).
+Set the slider to the range and value found on creation (original value on dragging of parameter). The range resets on the element, the slider you drag and the signal settings together.
 
 ### Pattern selection
 

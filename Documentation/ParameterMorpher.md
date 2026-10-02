@@ -731,7 +731,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   the confirmation says how many presets that affects.  
 
 - **`ResetParameters()`**  
-  Resets all UI elements to their default stored values.  
+  Resets all UI elements to their default stored values. A slider's range resets on the slider
+  and its signal settings too, and a Menu or StrMenu element keeps one slot per item.  
 
 - **`RenamePresetsOrder()`**  
   Renames and reorders presets based on current UI order. The selected preset and the blend
@@ -829,7 +830,7 @@ The following methods execute when connected callback scripts are defined:
   Triggered when a morphing process starts.
 
 - **`OnMorphingEnd(manager, morphingType, presetName)`**  
-  Triggered when a morphing process ends.
+  Triggered when a morphing process ends, including when Stop ends it.
 
 - **`OnPresetCall(manager, morphingType, presetName)`**  
   Triggered when a preset is invoked manually or programmatically.

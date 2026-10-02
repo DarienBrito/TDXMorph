@@ -290,7 +290,7 @@ Execute homonimus action. info is lister callback info object.
 ```python
 onPlayPause(info, value)
 ```
-Execute homonimus action. info is lister callback info object. value is on or off.
+Pause or resume the morph on the attached PresetManager. info is lister callback info object. value is on (play) or off (pause). A launch, Stop, Randomize or Interpolate ends the pause, and the button returns to playing by itself; that return calls neither the PresetManager nor `onAction`. A morph started from outside SceneLauncher leaves the button on paused; one click puts it right.
 
 ```python
 onPrevious(info)
@@ -310,7 +310,7 @@ On sequence plays the whole scenes sequence, ignoring the actions column. This i
 ```python
 onStop(info)
 ```
-Stop the morph, cancel launches still waiting out their Delay, disarm the pending follow action and end a running Sequence.
+Stop the morph, cancel launches still waiting out their Delay, disarm the pending follow action and end a running Sequence. Play/Pause returns to playing.
 
 ```python
 _updateTimeInfo(totalDuration)

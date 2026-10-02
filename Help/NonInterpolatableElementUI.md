@@ -31,6 +31,6 @@ Reorder widgets.
 ```python
 SetDefaultValue()
 ```
-Set the slider to the range and value found on creation (original value on dragging of parameter).
+Set the element to the range and value found on creation (original value on dragging of parameter). A Menu or StrMenu element keeps one slot per item.
 
 ### Private
