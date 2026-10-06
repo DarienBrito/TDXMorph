@@ -11,8 +11,8 @@
 > Presets written by older versions migrate automatically, but **back up your project and export your
 > presets before upgrading** from 3.2.1.
 >
-> TDXMorph 4 is an **alpha**. Every component has been through a full audit and a beta, but bugs are
-> still possible, so please [report](#support-and-feedback) anything you find.
+> TDXMorph 4 is a **public beta**. Every component has been through a full audit and a closed beta, but
+> bugs are still possible, so please [report](#support-and-feedback) anything you find.
 
 ## What it is
 
