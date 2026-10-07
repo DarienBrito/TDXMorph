@@ -85,7 +85,7 @@ The current row data.
 ```python
 SelectedRow()
 ```
-The selected row index, or -1 when nothing is selected.
+The selected row's data, or None when nothing is selected.
 
 ```python
 SetActiveRow(dataIndex)

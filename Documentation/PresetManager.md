@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 4.4.3
+**Version:** 4.4.4
 
 ---
 
@@ -142,7 +142,7 @@ op('PresetManager').MorphPreset('intro')
 | `Allowscripts` | Toggle | `On` | Allow embedded per-preset scripts to run. |
 | `Blendactive` | Toggle | `Off` | Enable manual blending between two presets. |
 | `Blenda` / `Blendb` | Menu | | The two presets to blend. |
-| `Blendfactor` | Float | `0.0` | Crossfade position between A and B. |
+| `Blendfactor` | Float | `0.0` | Crossfade position between A and B. Int, Toggle and Menu values snap: A's below 0.5, B's from 0.5 up. |
 | `Trackingtag` | Str | `TDXMorphPath` | The tag written onto tracked nodes so they can be found after a move. Changing it re-tags every tracked node. |
 | `Importjson` / `Exportjson` | Pulse | | Load or save presets and paths as JSON. |
 
@@ -253,7 +253,7 @@ True while a morph is running.
 ```python
 Blend = float
 ```
-Get/set the manual blend factor between the two chosen presets.
+Get/set the manual blend factor between the two chosen presets. Values that cannot interpolate (Int, Toggle, Menu) take preset A's below 0.5 and preset B's from 0.5 up.
 
 ```python
 BlendingActive = bool
@@ -319,7 +319,7 @@ Get/set the random distribution by name.
 ```python
 StorePreset(name=None, trackConfig=None)
 ```
-Capture the current parameter state of every tracked node into a preset. Falls back to the `Presetname` parameter when `name` is omitted. `trackConfig` is an optional `path -> {time, curve, distr, ...}` mapping that lets a host inject per-track fields at capture time; any key you leave out falls back to the global value. When `trackConfig` is `None`, time, curve and shape are captured from the paths editor, and an existing preset keeps its other per-track fields (distribution, group, end mode), so re-storing does not flatten them. A path whose Filter matches no parameter is skipped and named in one report; the other paths still store.
+Capture the current parameter state of every tracked node into a preset. Falls back to the `Presetname` parameter when `name` is omitted. `trackConfig` is an optional `path -> {time, curve, distr, ...}` mapping that lets a host inject per-track fields at capture time; any key you leave out falls back to the global value, except the curve shape: a track given its own curve without `a`, `b` and `c` takes that curve's defaults. When `trackConfig` is `None`, time, curve and shape are captured from the paths editor, and an existing preset keeps its other per-track fields (distribution, group, end mode), so re-storing does not flatten them. A path whose Filter matches no parameter is skipped and named in one report; the other paths still store.
 
 ```python
 StorePresetWithData(name, data)
@@ -378,7 +378,7 @@ Refresh the `Target` parameter menu from the stored preset names. Call this afte
 ExportJSON()
 ImportJSON()
 ```
-Prompt for a file and export or load presets plus tracked paths as JSON. Import refuses a file it cannot use (unreadable, a newer format, another tool's file such as a PresetSnap export, or presets of the wrong shape), says why, and changes nothing. After an import, the report lists any path that points at no operator in this project; edit or remove those in the paths editor.
+Prompt for a file and export or load presets plus tracked paths as JSON. Export keeps the stored preset order. Import refuses a file it cannot use (unreadable, a newer format, another tool's file such as a PresetSnap export, or presets of the wrong shape), says why, and changes nothing. After an import, the report lists any path that points at no operator in this project; edit or remove those in the paths editor.
 
 ```python
 InjectPresets(presets, paths)

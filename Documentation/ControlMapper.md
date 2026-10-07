@@ -62,8 +62,8 @@ Drop the component in, point it at your MIDI or OSC input, and let it find your 
 mapper = op('ControlMapper')
 
 mapper.par.Midi = op('midiin1')
-ScanTargets()
-SetMapMode(True)
+mapper.ScanTargets()
+mapper.SetMapMode(True)
 ```
 
 With map mode on, every registered target reveals itself. Click one to arm it, then move a control on your MIDI device or send an OSC message: the next channel that arrives binds to it.
@@ -71,7 +71,7 @@ With map mode on, every registered target reveals itself. Click one to arm it, t
 Leave map mode and the mappings route:
 
 ```python
-SetMapMode(False)
+mapper.SetMapMode(False)
 ```
 
 ---
@@ -137,7 +137,7 @@ The model is the `table_map` DAT, one row per mapping:
 | `chan` | The incoming channel name, for example `ch1ctrl9`. |
 | `target` | The target operator, keyed **relative** to `Maproot`. |
 | `par` | The parameter name on that operator. Defaults to `Value`. |
-| `mode` | The protocol the mapping was learned from. |
+| `mode` | How the value is applied. Always `absolute` in this version. |
 | `lo` | Low end of the target range. |
 | `hi` | High end of the target range. |
 | `takeover` | `jump` or `pickup`. |
@@ -151,8 +151,8 @@ Targets are stored relative on purpose. An absolute path is what once leaked a p
 Learning is a three step cycle: enter map mode, arm a target, send a channel.
 
 ```python
-SetMapMode(True)
-Arm(op('mySlider'), 'Value')
+mapper.SetMapMode(True)
+mapper.Arm(op('mySlider'), 'Value')
 ```
 
 The next channel that arrives calls `Map` for you and disarms. The teaching message is consumed by the learn, so it does not also route.

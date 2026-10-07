@@ -7,12 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.5] (4th quarter of 2026)
+## [Open Toolkit 4.3.6] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.4.3**, PresetSnap **1.3.0**,
+Current component versions on this line: PresetManager **4.4.4**, PresetSnap **1.3.0**,
 ControlMapper **1.1.0**, PresetInspector **1.5.8**, JSONTree **1.5.7**, ListView **1.0.9**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### PresetManager 4.4.4
+
+- **Stop freezes a morph where it is.** Stopped past the halfway point, a morph snapped to its target, and
+  stopped after a Pause it jumped back to its start. Stop now leaves every value where it was.
+- **A track set to `loop` or `pingpong` keeps looping** when another track finishes in the same frame. With
+  equal durations the whole morph used to end. **Behaviour change.**
+- **Manual Blend moves Int, Toggle and Menu values too:** preset A's below a factor of 0.5, preset B's from
+  0.5 up. They never moved before. **Behaviour change.**
+- **A track stored on its own curve keeps that curve's shape** instead of taking the global curve's.
+- **Export JSON keeps your preset order.** It sorted the names, so an export and import reordered Presets
+  Sequence.
+
+## [Open Toolkit 4.3.5] (4th quarter of 2026)
+
+PresetManager **4.4.3**, PresetSnap **1.3.0**, ControlMapper **1.1.0**, PresetInspector **1.5.8**,
+JSONTree **1.5.7**, ListView **1.0.9**.
 
 ### JSONTree 1.5.7
 

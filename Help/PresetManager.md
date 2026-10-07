@@ -3,7 +3,7 @@
 The heart of TDXMorph. This class stores and retrieves presets, and drives the morpher and
 random distribution nodes.
 
-Version 4.4.3. Capitalized methods are promoted and are the supported API. Lowercase
+Version 4.4.4. Capitalized methods are promoted and are the supported API. Lowercase
 methods are internal and may change between versions.
 
 For the full reference, including the preset schema, the multi-track engine and the
@@ -26,7 +26,7 @@ Changes the behaviour of "randomize" and "morph" to be automatic, based on an N 
 ```python
 Blend = float
 ```
-Get/set the manual blend factor between the two presets chosen in Blend A and Blend B.
+Get/set the manual blend factor between the two presets chosen in Blend A and Blend B. Int, Toggle and Menu values take A's below 0.5 and B's from 0.5 up.
 
 ```python
 BlendingActive = bool

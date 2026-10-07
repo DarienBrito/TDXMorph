@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.11.1
+**Version:** 4.11.2
 
 > SceneLauncher is a **commercial** component of the TDXMorph toolkit, governed by the
 > SceneLauncher EULA (see the `LICENSE` operator inside the component). No redistribution,
@@ -15,6 +15,15 @@ Copyright © 2020–2026
 > documentation only.
 
 ---
+
+## 4.11.2
+
+- **Importing a PresetManager file keeps your scenes.** A file with presets and no scenes replaced the
+  presets and wiped the cue list. Scenes now stay, and a scene whose preset the file lacks goes back to
+  None, as deleting that preset does. **Behaviour change.**
+- Fixed in the attached PresetManager (needs 4.4.4): Stop freezes a scene where it is instead of jumping
+  to its target past the halfway point or after a Pause, and a looping track keeps looping when another
+  finishes in the same frame.
 
 ## 4.11.1
 
@@ -605,7 +614,9 @@ They allow stepping through, randomizing, or looping scenes.
 - **`ImportPresetsJSON()`**  
   Imports both presets and scenes from a `.json` file.  
   The file is checked and its presets handed to the linked `PresetManager` before any scene is
-  replaced, so a refused file leaves scenes and presets untouched.
+  replaced, so a refused file leaves scenes and presets untouched. A file with no scenes (a
+  PresetManager export) imports its presets and keeps your scenes; a scene whose preset is gone
+  goes back to None.
 
 - **`ExportPresetsJSON()`**  
   Exports all current scenes and presets into a single `.json` file.  

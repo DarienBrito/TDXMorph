@@ -241,7 +241,7 @@ Push a column spec or row data directly, for host-less or programmatic use.
 Rows()
 SelectedRow()
 ```
-The current row data, and the selected row index (`-1` when nothing is selected).
+The current row data, and the selected row's data (`None` when nothing is selected).
 
 ```python
 SetActiveRow(dataIndex)

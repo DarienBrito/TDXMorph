@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.18.1
+**Version:** 4.18.2
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). No
@@ -18,6 +18,22 @@ Copyright © 2020–2026
 > keep their own MIT licence.
 
 ---
+
+## 4.18.2
+
+- **Stop freezes a morph where it is.** Stopped past the halfway point, a morph snapped to its target, and
+  stopped after a Pause it jumped back to its start. Stop now leaves every value where it was.
+- **A track set to `loop` or `pingpong` keeps looping** when another track finishes in the same frame. With
+  equal durations the whole morph used to end. **Behaviour change.**
+- **Manual Blend moves Int, Toggle and Menu values too:** preset A's below a factor of 0.5, preset B's from
+  0.5 up. They never moved before. **Behaviour change.**
+- **A track stored on its own curve keeps that curve's shape** instead of taking the global curve's.
+- **Renaming ParameterMorpher no longer breaks a container.** Export presets, Reset parameters, Clear
+  parameters and the element API failed after the tool was renamed. String elements also lost the Look's
+  label width after a rename.
+- **An imported container's preset buttons respond.** After an import they could stay dead.
+- **An import takes the file's container name only when no other container uses it**, so two containers
+  no longer share a name. **Behaviour change.**
 
 ## 4.18.1
 
@@ -828,7 +844,8 @@ This class is primarily used to create and manage **parameter-linked sliders** f
   Returns a dictionary of element values and ranges.  
 
 - **`CreateElement(source, parameter, dataSource='parameter', customName=None)`**  
-  Creates and binds a new UI element linked to a parameter or preset.  
+  Creates and binds a new UI element linked to a parameter or preset. `parameter` is the `Par` itself
+  (`op('noise1').par.period`), not its name.  
   Handles the correct UI type allocation, binding, and reference registration.  
 
 - **`AddScript()`**  

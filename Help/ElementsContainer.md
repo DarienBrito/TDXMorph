@@ -43,7 +43,7 @@ Deletes all elements in the ElementsContainer, after a confirmation, and removes
 ```python
 CreateElement(source, parameter, dataSource='parameter', customName=None)
 ```
-Handles UI creation from a stored preset or from a grabbed parameter. In here operations for correct UI resource allocation take place. Notice that we recreate the original data type for each UI element, to make the most out of the limitations	with cloning, which do not allow for a full Object Oriented approach.
+Handles UI creation from a stored preset or from a grabbed parameter. `parameter` is the `Par` itself, not its name. In here operations for correct UI resource allocation take place. Notice that we recreate the original data type for each UI element, to make the most out of the limitations	with cloning, which do not allow for a full Object Oriented approach.
 
 ```python
 Delete()
