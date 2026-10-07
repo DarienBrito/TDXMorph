@@ -46,7 +46,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 | [**PresetInspector**](PresetInspector/) | 1.5.8 | Preset viewer and value editor. |
 | [**JSONTree**](JSONTree/) | 1.5.7 | Reusable JSON tree viewer with inline editing. |
 | [**ListView**](ListView/) | 1.0.9 | Reusable flat-columnar list widget. |
-| [**ControlMapper**](ControlMapper/) | 1.1.0 | MIDI and OSC mapping for any custom parameter. |
+| [**ControlMapper**](ControlMapper/) | 1.1.1 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
 [Patreon](https://www.patreon.com/c/darienbrito).

@@ -4,7 +4,7 @@
 Copyright (c) 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.1.0
+**Version:** 1.1.1
 
 ---
 
@@ -155,7 +155,7 @@ mapper.SetMapMode(True)
 mapper.Arm(op('mySlider'), 'Value')
 ```
 
-The next channel that arrives calls `Map` for you and disarms. The teaching message is consumed by the learn, so it does not also route.
+The next channel that arrives calls `Map` for you and disarms, including the very first message on an address the input has never seen. The teaching message is consumed by the learn, so it does not also route.
 
 To re-key an existing mapping onto a different control, arm the row instead of the widget:
 

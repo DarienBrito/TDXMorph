@@ -3,7 +3,7 @@
 The MIDI/OSC mapping service. One instance sits inside ParameterMorpher and SceneLauncher and
 serves both protocols from a single list of mappings.
 
-Class: `extControlMapper`. Version 1.1.0.
+Class: `extControlMapper`. Version 1.1.1.
 
 > **MIT licensed.** It ships from this repository as a standalone component, and also
 > travels embedded inside the commercial ParameterMorpher and SceneLauncher, which are

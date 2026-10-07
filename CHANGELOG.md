@@ -10,7 +10,7 @@ toolkit version, because they now ship and update independently.
 ## [Open Toolkit 4.3.6] (4th quarter of 2026)
 
 Current component versions on this line: PresetManager **4.4.4**, PresetSnap **1.3.0**,
-ControlMapper **1.1.0**, PresetInspector **1.5.8**, JSONTree **1.5.7**, ListView **1.0.9**.
+ControlMapper **1.1.1**, PresetInspector **1.5.8**, JSONTree **1.5.7**, ListView **1.0.9**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
 
@@ -25,6 +25,11 @@ rather than recording what any one toolkit release contained.
 - **A track stored on its own curve keeps that curve's shape** instead of taking the global curve's.
 - **Export JSON keeps your preset order.** It sorted the names, so an export and import reordered Presets
   Sequence.
+
+### ControlMapper 1.1.1
+
+- **MIDI and OSC learn and route on the very first message.** A one-shot OSC trigger needed two presses
+  to map, and after reopening a project the first message on a mapped address was dropped.
 
 ## [Open Toolkit 4.3.5] (4th quarter of 2026)
 

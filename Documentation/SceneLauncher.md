@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.11.2
+**Version:** 4.11.3
 
 > SceneLauncher is a **commercial** component of the TDXMorph toolkit, governed by the
 > SceneLauncher EULA (see the `LICENSE` operator inside the component). No redistribution,
@@ -15,6 +15,11 @@ Copyright © 2020–2026
 > documentation only.
 
 ---
+
+## 4.11.3
+
+- **MIDI and OSC learn and route on the very first message.** A one-shot OSC trigger needed two presses
+  to map, and after reopening a project the first message on a mapped address was dropped.
 
 ## 4.11.2
 
