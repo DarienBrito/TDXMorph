@@ -6,7 +6,7 @@ engine. Drop the `.tox` into a base or container and a `Presets` page appears on
 **Headless.** The component is a base COMP with no panel: the seven parameters it injects onto the
 host are the interface, and the parameter editor opens in its own window.
 
-Class: `extPresetSnap`. Version 1.3.1. MIT licensed, and shipped standalone in this repository.
+Class: `extPresetSnap`. Version 1.3.2. MIT licensed, and shipped standalone in this repository.
 
 Full guide: [PresetSnap](../Documentation/PresetSnap.md).
 
@@ -25,7 +25,8 @@ Write the live value of every included, constant mode parameter into the named p
 ```python
 Recall(name)
 ```
-Write one preset's column back onto the host. Returns a tally of what was written and what was
+Write one preset's column back onto the host and select it on the `Preset` menu. Returns a tally of
+what was written and what was
 skipped, by reason: `written`, `skipped_excluded`, `skipped_missing`, `skipped_mode`,
 `skipped_empty`, `failed`.
 

@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.3.1
+**Version:** 1.3.2
 
 ---
 
@@ -207,7 +207,7 @@ Write the live value of every included, constant mode parameter into the named p
 ```python
 Recall(name)
 ```
-Write one preset's column back onto the host. Returns the tally described in [Storing and recalling](#storing-and-recalling).
+Write one preset's column back onto the host and select it on the `Preset` menu, so the menu always names what is on the host. Returns the tally described in [Storing and recalling](#storing-and-recalling).
 
 ```python
 NewPreset(name='')

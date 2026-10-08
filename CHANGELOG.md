@@ -7,12 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.7] (4th quarter of 2026)
+## [Open Toolkit 4.3.8] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.4.5**, PresetSnap **1.3.1**,
+Current component versions on this line: PresetManager **4.4.5**, PresetSnap **1.3.2**,
 ControlMapper **1.1.2**, PresetInspector **1.5.9**, JSONTree **1.5.8**, ListView **1.0.10**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### PresetSnap 1.3.2
+
+- **`Recall(name)` moves the `Preset` menu to the preset it recalled.** A recall from a script used to write
+  the values but leave the menu, and `CurrentPreset()`, naming the previous preset. Choosing from the menu was
+  always right.
+- **The file no longer carries an unused path from the development project** behind one of its expressions.
+
+## [Open Toolkit 4.3.7] (4th quarter of 2026)
 
 ### All six components
 

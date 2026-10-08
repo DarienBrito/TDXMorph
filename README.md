@@ -42,7 +42,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 | Component | Version | What it is |
 |---|---|---|
 | [**PresetManager**](PresetManager/) | 4.4.5 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
-| [**PresetSnap**](PresetSnap/) | 1.3.1 | Plain store and recall for any COMP. No morphing, no setup. |
+| [**PresetSnap**](PresetSnap/) | 1.3.2 | Plain store and recall for any COMP. No morphing, no setup. |
 | [**PresetInspector**](PresetInspector/) | 1.5.9 | Preset viewer and value editor. |
 | [**JSONTree**](JSONTree/) | 1.5.8 | Reusable JSON tree viewer with inline editing. |
 | [**ListView**](ListView/) | 1.0.10 | Reusable flat-columnar list widget. |
