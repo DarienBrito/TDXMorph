@@ -51,6 +51,17 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
 [Patreon](https://www.patreon.com/darienbrito).
 
+## Example project
+
+[**TDXMorphOpenExample.toe**](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorphOpenExample.toe)
+is a complete project built only from the free components: a particle system that spells words, with
+PresetManager morphing between its behaviours, PresetSnap switching its palettes, ControlMapper taking OSC,
+and PresetInspector and JSONTree showing what is stored. It opens in Perform mode; press **Help** for a
+step-by-step tour, or Esc to explore the network, where every part is annotated. Requires TouchDesigner
+2025.33230 or newer.
+
+The example is licensed differently from the components, see [License](#license).
+
 ## Install
 
 Built and tested on TouchDesigner 2025.33230.
@@ -114,6 +125,7 @@ the maintenance, the free side and the learning resources.
 | | |
 |---|---|
 | **The six components above** | [MIT](https://opensource.org/license/mit). Use them in personal and commercial projects, modify them freely, redistribute or sell derived works, combine them with closed-source software. You must include the copyright notice and the licence text, and accept that there is no warranty or liability. |
+| **The example project** | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Study it, change it and share it with credit, for non-commercial use. The components inside it keep their own MIT licence. |
 | **ParameterMorpher and SceneLauncher** | Commercial. Licensed, not sold, each governed by its own EULA rather than by MIT: no redistribution, resale, sublicensing or sharing. The terms are in the `LICENSE` operator inside each component. |
 
 Unsure what MIT implies? [Here is a plain explanation](https://memgraph.com/blog/what-is-mit-license).
