@@ -1,7 +1,7 @@
 # Signal Engine
 
 > **PROPRIETARY. Licensed, not sold.** Part of the commercial ParameterMorpher
-> component, available through [Patreon](https://www.patreon.com/c/darienbrito), not from
+> component, available through [Patreon](https://www.patreon.com/darienbrito), not from
 > this repository.
 
 One service at the component root drives the LFOs and patterns of every element, rather than

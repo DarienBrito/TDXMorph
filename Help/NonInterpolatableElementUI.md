@@ -1,7 +1,7 @@
 # NonInterpolatableElementUI
 
 > **PROPRIETARY. Licensed, not sold.** Part of the commercial ParameterMorpher
-> component, available through [Patreon](https://www.patreon.com/c/darienbrito), not from
+> component, available through [Patreon](https://www.patreon.com/darienbrito), not from
 > this repository.
 
 ## Core-level methods

@@ -4,14 +4,14 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.18.3
+**Version:** 4.18.4
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). No
 > redistribution, resale, sublicensing or sharing. No warranty.
 >
 > It is **not** MIT licensed and is not distributed from this repository. It is available
-> through [Patreon](https://www.patreon.com/c/darienbrito). This page is reference
+> through [Patreon](https://www.patreon.com/darienbrito). This page is reference
 > documentation only.
 >
 > The MIT parts embedded inside it, the PresetManager engine and the `Lib/Patterns` library,
@@ -502,7 +502,7 @@ class.
 
 ## Installation
 
-1. Download `ParameterMorpher.tox` from [Patreon](https://www.patreon.com/c/darienbrito).
+1. Download `ParameterMorpher.tox` from [Patreon](https://www.patreon.com/darienbrito).
 2. Drag the `.tox` into your TouchDesigner network, or use **File > Import > Component**.
 3. Click the component's viewer to open the panel.
 

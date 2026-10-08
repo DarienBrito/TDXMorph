@@ -4,7 +4,7 @@ There are various shortcuts in the TDXMorph ecosystem. I have tried to keep them
 
 > **PROPRIETARY. Licensed, not sold.** Part of the commercial ParameterMorpher and
 > SceneLauncher components, available through
-> [Patreon](https://www.patreon.com/c/darienbrito), not from this repository.
+> [Patreon](https://www.patreon.com/darienbrito), not from this repository.
 
 ## ParameterMorpher
 

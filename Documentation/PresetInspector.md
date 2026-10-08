@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.5.8
+**Version:** 1.5.9
 
 ---
 
@@ -69,7 +69,7 @@ The tree fills with the stored presets. Double-click a value to edit it.
 
 ### About page
 
-The `Readme`, `Help`, `Support` and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
+The `Readme`, `Help`, `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
 
 ### Look page
 

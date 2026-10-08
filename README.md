@@ -41,15 +41,15 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 
 | Component | Version | What it is |
 |---|---|---|
-| [**PresetManager**](PresetManager/) | 4.4.4 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
-| [**PresetSnap**](PresetSnap/) | 1.3.0 | Plain store and recall for any COMP. No morphing, no setup. |
-| [**PresetInspector**](PresetInspector/) | 1.5.8 | Preset viewer and value editor. |
-| [**JSONTree**](JSONTree/) | 1.5.7 | Reusable JSON tree viewer with inline editing. |
-| [**ListView**](ListView/) | 1.0.9 | Reusable flat-columnar list widget. |
-| [**ControlMapper**](ControlMapper/) | 1.1.1 | MIDI and OSC mapping for any custom parameter. |
+| [**PresetManager**](PresetManager/) | 4.4.5 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
+| [**PresetSnap**](PresetSnap/) | 1.3.1 | Plain store and recall for any COMP. No morphing, no setup. |
+| [**PresetInspector**](PresetInspector/) | 1.5.9 | Preset viewer and value editor. |
+| [**JSONTree**](JSONTree/) | 1.5.8 | Reusable JSON tree viewer with inline editing. |
+| [**ListView**](ListView/) | 1.0.10 | Reusable flat-columnar list widget. |
+| [**ControlMapper**](ControlMapper/) | 1.1.2 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
-[Patreon](https://www.patreon.com/c/darienbrito).
+[Patreon](https://www.patreon.com/darienbrito).
 
 ## Install
 
@@ -126,7 +126,7 @@ really appreciate hearing about it.
 
 You can find me at [darienbrito.com](https://darienbrito.com/) and on
 [Instagram](https://www.instagram.com/darien.brito/). If you want to go one step further, my
-[Patreon](https://www.patreon.com/c/darienbrito) is where the paid components live and where the
+[Patreon](https://www.patreon.com/darienbrito) is where the paid components live and where the
 funding for all of this comes from. 💛
 
 This tool exists because of the sense of camaraderie in the TouchDesigner community and the

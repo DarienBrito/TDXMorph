@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.5.7
+**Version:** 1.5.8
 
 ---
 
@@ -82,7 +82,7 @@ Both set `Source` to `Data` for you.
 
 ### About page
 
-The `Support` and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
+The `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
 
 ### Look page
 

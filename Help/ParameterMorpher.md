@@ -3,11 +3,11 @@
 The root of the ParameterMorpher component. Manages the internal library and the tools built
 from it.
 
-Class: `extParameterMorpher`. Version 4.18.3.
+Class: `extParameterMorpher`. Version 4.18.4.
 
 > **PROPRIETARY. Licensed, not sold.** A commercial component governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). Available through
-> [Patreon](https://www.patreon.com/c/darienbrito), not from this repository.
+> [Patreon](https://www.patreon.com/darienbrito), not from this repository.
 
 This file was previously named `TDXMorph.md`, from the era when the whole toolkit was one
 node. It has always documented the ParameterMorpher root.
@@ -92,7 +92,7 @@ Changes the layout from vertical to horizontal. Only useful when there is more t
 | Inputs | `Midi`, `Osc`, `Transport` (CHOP references) |
 | Mappings | `Managemappings`, `Clearmappings` (both protocols share one list since 4.5.0) |
 | Info | `Containers` (read only) |
-| About | The `Readme`, `Help`, `Support`, `Website` pulses, then `Author` and `Version`, which are read only |
+| About | The `Readme`, `Help`, `Support` (labelled Patreon), `Website` pulses, then `Author` and `Version`, which are read only |
 
 ## Removed
 

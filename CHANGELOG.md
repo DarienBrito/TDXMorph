@@ -7,12 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.6] (4th quarter of 2026)
+## [Open Toolkit 4.3.7] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.4.4**, PresetSnap **1.3.0**,
-ControlMapper **1.1.1**, PresetInspector **1.5.8**, JSONTree **1.5.7**, ListView **1.0.9**.
+Current component versions on this line: PresetManager **4.4.5**, PresetSnap **1.3.1**,
+ControlMapper **1.1.2**, PresetInspector **1.5.9**, JSONTree **1.5.8**, ListView **1.0.10**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### All six components
+
+- **The About page's Support button is labelled Patreon**, which says where it goes. The parameter keeps
+  its name, `Support`, so a script that pulses it keeps working.
+- **It opens patreon.com/darienbrito** (it was patreon.com/c/darienbrito; both reach the same page).
+
+## [Open Toolkit 4.3.6] (4th quarter of 2026)
 
 ### PresetManager 4.4.4
 

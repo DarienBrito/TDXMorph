@@ -11,7 +11,7 @@ Each one of this has slight variations of this prototype class to fit their loca
 
 > **PROPRIETARY. Licensed, not sold.** Part of the commercial ParameterMorpher and
 > SceneLauncher components, available through
-> [Patreon](https://www.patreon.com/c/darienbrito), not from this repository.
+> [Patreon](https://www.patreon.com/darienbrito), not from this repository.
 
 ## Core level methods
 

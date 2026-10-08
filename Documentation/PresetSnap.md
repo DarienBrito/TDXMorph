@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.3.0
+**Version:** 1.3.1
 
 ---
 
@@ -126,7 +126,7 @@ If the host already has a page called `Presets`, the tool adds its parameters to
 
 ### About page
 
-The `Readme`, `Help`, `Support` and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
+The `Readme`, `Help`, `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
 
 ---
 

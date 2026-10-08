@@ -3,7 +3,7 @@
 A reusable collapsible JSON and data tree viewer with inline editing, built on the native
 `listCOMP`. Shipped standalone and embedded inside the PresetInspector.
 
-Version 1.5.7. MIT. Capitalized methods are promoted and are the supported API.
+Version 1.5.8. MIT. Capitalized methods are promoted and are the supported API.
 
 Full reference: [Documentation/JSONTree.md](../Documentation/JSONTree.md).
 

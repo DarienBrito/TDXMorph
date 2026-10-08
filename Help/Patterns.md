@@ -1,7 +1,7 @@
 # Patterns
 
 > **MIT licensed**, but distributed only inside the commercial ParameterMorpher
-> component, which is available through [Patreon](https://www.patreon.com/c/darienbrito), not
+> component, which is available through [Patreon](https://www.patreon.com/darienbrito), not
 > from this repository.
 
 ## Core level methods
