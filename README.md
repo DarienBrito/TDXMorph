@@ -62,6 +62,10 @@ step-by-step tour, or Esc to explore the network, where every part is annotated.
 
 The example is licensed differently from the components, see [License](#license).
 
+A complete example that adds the paid components, with SceneLauncher playing the set and ParameterMorpher
+morphing the look, is available on [Patreon](https://www.patreon.com/darienbrito) for patrons on the Tools tier
+and above.
+
 ## Install
 
 Built and tested on TouchDesigner 2025.33230.
