@@ -54,7 +54,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 ## Example project
 
 [**TDXMorphOpenExample.toe**](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorphOpenExample.toe)
-is a complete project built only from the free components: a particle system that spells words, with
+is a basic example built only from the free components: a particle system that spells words, with
 PresetManager morphing between its behaviours, PresetSnap switching its palettes, ControlMapper taking OSC,
 and PresetInspector and JSONTree showing what is stored. It opens in Perform mode; press **Help** for a
 step-by-step tour, or Esc to explore the network, where every part is annotated. Requires TouchDesigner
@@ -62,9 +62,9 @@ step-by-step tour, or Esc to explore the network, where every part is annotated.
 
 The example is licensed differently from the components, see [License](#license).
 
-A complete example that adds the paid components, with SceneLauncher playing the set and ParameterMorpher
-morphing the look, is available on [Patreon](https://www.patreon.com/darienbrito) for patrons on the Tools tier
-and above.
+The **full example** is the extended, complete version. It adds the paid components, with SceneLauncher
+playing the set as scenes and ParameterMorpher morphing the look, and is available on
+[Patreon](https://www.patreon.com/darienbrito) for patrons on the Tools tier and above.
 
 ## Install
 
