@@ -3,7 +3,7 @@
 A reusable flat-columnar list widget built on the native `listCOMP`. Shipped standalone and
 used internally by the PresetManager paths editor.
 
-Version 1.0.10. MIT. Capitalized methods are promoted and are the supported API.
+Version 1.1.0. MIT. Capitalized methods are promoted and are the supported API.
 
 Full reference: [Documentation/ListView.md](../Documentation/ListView.md).
 
@@ -37,6 +37,11 @@ Show the column header row.
 Emptyheader = bool
 ```
 Keep the header visible when there is no data yet, instead of rendering fully empty.
+
+```python
+Dropcallbacks = DAT
+```
+A drag/drop callbacks DAT. Set, the list takes drops through it (`comp.dropRow` = the row under the drop, a dragged parameter arrives in `info['dragItems']`). Empty, drops go to `ListViewDrop`.
 
 ```python
 Skin = str

@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.0.10
+**Version:** 1.1.0
 
 ---
 
@@ -95,6 +95,7 @@ That renders a working, editable, reorderable grid. To react to edits and clicks
 | `Editable` | Toggle | `On` | Master switch for inline editing. A column must also set `editable`. |
 | `Header` | Toggle | `On` | Show the column header row. |
 | `Emptyheader` | Toggle | `Off` | Keep the header visible when there is no data yet, instead of rendering fully empty. |
+| `Dropcallbacks` | DAT | `''` | A drag/drop callbacks DAT. Set, the list takes drops through it (see [Drops](#drops)). Empty, drops go to `ListViewDrop`. |
 
 ### Look page
 
@@ -167,6 +168,14 @@ A list of dicts keyed by the column keys:
 
 Carry a private id in `_key` when you need stable identity across reorders and refreshes. The selected row index is stored on the component, and on rows with a `_key` it follows its row through `Refresh` and `SetRows` (and clears when the row is gone); without one it stays at the same position. A double-click is also told apart by `_key`, or by name and position when there is none.
 
+Give a row a `_style` dict to change how single cells of that row look. It is keyed by column key (or by `action`, for an icon column with no key), and each entry can set `text`, `color`, `bg`, `font`, `bold` and `help`:
+
+```python
+{'name': 'intro', 'level': 0.4, '_style': {'name': {'bold': True, 'color': (1, 0.6, 0.2)}, 'level': {'help': 'muted'}}}
+```
+
+It applies after the column's kind has drawn the cell, so `text` replaces an icon cell's glyph and `help` replaces the column's tooltip for that one cell. Colours are RGB or RGBA. A row without `_style` costs nothing.
+
 ---
 
 ## The Callbacks contract
@@ -191,6 +200,10 @@ Dispatch order is **Callbacks DAT module, then the `Host` component's promoted m
 The column header rename and align menu is **built in**. You only need `ListViewHeaderMenu` if you want to replace it.
 
 Keep the Callbacks DAT outside the widget itself, as a sibling or a child of the host.
+
+### Drops
+
+With `Dropcallbacks` empty, a drop on the list goes to `ListViewDrop(lister, source)`, which also handles dragging rows between lists. Point `Dropcallbacks` at a DAT holding TouchDesigner's drag/drop callbacks to handle drops yourself: the list then takes drops through that DAT, `comp.dropRow` is the row under the drop, and a dragged parameter arrives in `info['dragItems']`.
 
 ### A minimal Callbacks module
 
@@ -273,7 +286,7 @@ Switch the colour skin and redraw, returning the name that took effect. With no 
 
 ## Theming
 
-`listViewTheme` is any module exposing the theme schema: fonts, `ROW_A` and `ROW_B`, `HEADER_BG` and `HEADER_FG`, `SELECT_BG` with `SELECT_ALPHA`, `TEXT`, `TEXT_DIM`, `ACCENT`, `BADGE_TEXT`, `OTHER_COLOR`, `VALUE_COLORS`, `TYPE_COLORS`, `PAD_X`, `DBLCLICK_SECONDS` and the glyph set. Colours are RGB 3-tuples; the engine appends alpha.
+`listViewTheme` is any module exposing the theme schema: fonts, `ROW_A` and `ROW_B`, `HEADER_BG` and `HEADER_FG`, `SELECT_BG` with `SELECT_ALPHA`, `TEXT`, `TEXT_DIM`, `ACCENT`, `BADGE_TEXT`, `OTHER_COLOR`, `VALUE_COLORS`, `TYPE_COLORS`, `PAD_X`, `DBLCLICK_SECONDS` and the glyph set. Colours are RGB 3-tuples; the engine appends alpha. Optional `EDIT_BG` and `EDIT_TEXT` colour a cell while it is being edited (a light field with dark text by default).
 
 Theming is **fail-soft**: a missing render symbol falls back to a neutral default, so a partial theme still renders. A misspelled symbol still raises, so typos are not silently swallowed.
 

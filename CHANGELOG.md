@@ -7,12 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.8] (4th quarter of 2026)
+## [Open Toolkit 4.3.9] (4th quarter of 2026)
 
 Current component versions on this line: PresetManager **4.4.5**, PresetSnap **1.3.2**,
-ControlMapper **1.1.2**, PresetInspector **1.5.9**, JSONTree **1.5.8**, ListView **1.0.10**.
+ControlMapper **1.1.2**, PresetInspector **1.5.9**, JSONTree **1.5.8**, ListView **1.1.0**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### ListView 1.1.0
+
+- **A row can restyle its own cells.** Give it a `_style` dict keyed by column, with any of `text`, `color`,
+  `bg`, `font`, `bold` and `help` (that cell's tooltip). A row without one looks as before.
+- **`Dropcallbacks`** (ListView page): point it at a drag/drop callbacks DAT to handle drops yourself, with the
+  row under the drop and any dragged parameters. Left empty, drops work as before.
+- **Fixed: editing a cell showed a blank box.** Double-clicking an editable cell opened a light box with
+  light text, so the value looked empty. The cell now reads as an input field: dark text on a light background.
+
+## [Open Toolkit 4.3.8] (4th quarter of 2026)
 
 ### PresetSnap 1.3.2
 

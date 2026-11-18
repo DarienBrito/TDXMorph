@@ -45,7 +45,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 | [**PresetSnap**](PresetSnap/) | 1.3.2 | Plain store and recall for any COMP. No morphing, no setup. |
 | [**PresetInspector**](PresetInspector/) | 1.5.9 | Preset viewer and value editor. |
 | [**JSONTree**](JSONTree/) | 1.5.8 | Reusable JSON tree viewer with inline editing. |
-| [**ListView**](ListView/) | 1.0.10 | Reusable flat-columnar list widget. |
+| [**ListView**](ListView/) | 1.1.0 | Reusable flat-columnar list widget. |
 | [**ControlMapper**](ControlMapper/) | 1.1.2 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
