@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.18.4
+**Version:** 4.18.5
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). No
@@ -18,6 +18,12 @@ Copyright © 2020–2026
 > keep their own MIT licence.
 
 ---
+
+## 4.18.5
+
+- **Elements follow a renamed or moved source.** Renaming the operator an element is bound to, or a COMP
+  above it such as the project COMP, left every element showing errors until you renamed it back. Elements
+  now follow the rename, the way PresetManager does, including in projects saved with an earlier version.
 
 ## 4.18.3
 
