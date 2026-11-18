@@ -6,6 +6,9 @@ Copyright © 2026
 **License:** **PROPRIETARY. Licensed, not sold.**  
 **Version:** 1.4.0
 
+> **Coming soon.** ParameterTimeline is not released yet. This page documents the component as it stands
+> and may change before release.
+
 > ParameterTimeline is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterTimeline EULA (see the `LICENSE` operator inside the component). No redistribution,
 > resale, sublicensing or sharing. No warranty.

@@ -26,7 +26,8 @@ It also ships the widgets it is built from, so you can put them in your own syst
 
 ## Start here
 
-Three ways in. Pick the one that matches how you work.
+Three ways in. Pick the one that matches how you work. The [guides](https://darienbrito.com/tdxmorph/) walk
+through each one.
 
 | Component | Shape | What it gives you |
 |---|---|---|
@@ -49,7 +50,7 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 | [**ControlMapper**](ControlMapper/) | 1.1.2 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
-[Patreon](https://www.patreon.com/darienbrito).
+[Patreon](https://www.patreon.com/darienbrito). **ParameterTimeline**, a paid timeline for any parameter, is coming soon.
 
 ## Example project
 
@@ -110,13 +111,16 @@ whole system. Full list in [SHORTCUTS.md](SHORTCUTS.md).
 
 ## Documentation
 
+**[TDXMorph Guides](https://darienbrito.com/tdxmorph/)**: what each component shows on screen and every way to
+work with it, in plain words.
+
 Full reference per component: [PresetManager](Documentation/PresetManager.md) ·
 [PresetSnap](Documentation/PresetSnap.md) · [PresetInspector](Documentation/PresetInspector.md) ·
 [JSONTree](Documentation/JSONTree.md) · [ListView](Documentation/ListView.md) ·
 [ControlMapper](Documentation/ControlMapper.md)
 
 Paid components: [ParameterMorpher](Documentation/ParameterMorpher.md) ·
-[SceneLauncher](Documentation/SceneLauncher.md). These are reference pages for products distributed
+[SceneLauncher](Documentation/SceneLauncher.md) · [ParameterTimeline](Documentation/ParameterTimeline.md) (coming soon). These are reference pages for products distributed
 through Patreon rather than from this repository.
 
 Terse per-class API notes live in [Help](Help/).
@@ -130,7 +134,7 @@ the maintenance, the free side and the learning resources.
 |---|---|
 | **The six components above** | [MIT](https://opensource.org/license/mit). Use them in personal and commercial projects, modify them freely, redistribute or sell derived works, combine them with closed-source software. You must include the copyright notice and the licence text, and accept that there is no warranty or liability. |
 | **The example project** | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Study it, change it and share it with credit, for non-commercial use. The components inside it keep their own MIT licence. |
-| **ParameterMorpher and SceneLauncher** | Commercial. Licensed, not sold, each governed by its own EULA rather than by MIT: no redistribution, resale, sublicensing or sharing. The terms are in the `LICENSE` operator inside each component. |
+| **ParameterMorpher, SceneLauncher and ParameterTimeline** | Commercial. Licensed, not sold, each governed by its own EULA rather than by MIT: no redistribution, resale, sublicensing or sharing. The terms are in the `LICENSE` operator inside each component. |
 
 Unsure what MIT implies? [Here is a plain explanation](https://memgraph.com/blog/what-is-mit-license).
 

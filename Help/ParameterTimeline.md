@@ -1,5 +1,7 @@
 # ParameterTimeline
 
+**Coming soon.** Not released yet; these notes may change before release.
+
 Keyed poses on a beat or seconds timeline, baked on edit and played by the built-in transport
 (play, pause, stop, loop) or an external clock (a CHOP such as Nexum's `out_transport`, or the
 `Position` parameter). Drives the custom parameters of
