@@ -4,17 +4,25 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.11.4
+**Version:** 4.12.0
 
 > SceneLauncher is a **commercial** component of the TDXMorph toolkit, governed by the
-> SceneLauncher EULA (see the `LICENSE` operator inside the component). No redistribution,
-> resale, sublicensing or sharing. No warranty.
+> SceneLauncher EULA (see the `LICENSE` operator inside the component, or About > License).
+> Use it in anything you make, client work included; credit appreciated, not required. Hand it over
+> only inside a finished project: your client runs it there, with no reuse, sharing or resale.
+> No sharing or resale of the component, alone or built into tools of your own. No warranty.
 >
 > It is **not** MIT licensed and is not distributed from this repository. It is available
 > through [Patreon](https://www.patreon.com/darienbrito). This page is reference
 > documentation only.
 
 ---
+
+## 4.12.0
+
+- **License page.** The About page gains `Help` (the tutorials playlist), `Youtube` and `License`, which shows the EULA in its own window with a plain-language summary.
+- **EULA v2**: the same terms in plain language (see the box above).
+- With PresetManager 4.5.0 attached, presets keep the expressions of the parameters they capture.
 
 ## 4.11.3
 

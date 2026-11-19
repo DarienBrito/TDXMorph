@@ -4,11 +4,13 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.18.5
+**Version:** 4.19.0
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
-> ParameterMorpher EULA (see the `LICENSE` operator inside the component). No
-> redistribution, resale, sublicensing or sharing. No warranty.
+> ParameterMorpher EULA (see the `LICENSE` operator inside the component, or About > License).
+> Use it in anything you make, client work included; credit appreciated, not required. Hand it over
+> only inside a finished project: your client runs it there, with no reuse, sharing or resale.
+> No sharing or resale of the component, alone or built into tools of your own. No warranty.
 >
 > It is **not** MIT licensed and is not distributed from this repository. It is available
 > through [Patreon](https://www.patreon.com/darienbrito). This page is reference
@@ -19,8 +21,11 @@ Copyright © 2020–2026
 
 ---
 
-## 4.18.5
+## 4.19.0
 
+- **License page.** The About page gains `Help` (the tutorials playlist), `Youtube` and `License`, which shows the EULA in its own window with a plain-language summary.
+- **EULA v2**: the same terms in plain language (see the box above).
+- **Engine updates from PresetManager 4.5.0**: stopping a morph drops its pending end-of-morph values instead of applying them at the end of a later morph, and storing no longer fails on a parameter whose expression has an error.
 - **Elements follow a renamed or moved source.** Renaming the operator an element is bound to, or a COMP
   above it such as the project COMP, left every element showing errors until you renamed it back. Elements
   now follow the rename, the way PresetManager does, including in projects saved with an earlier version.

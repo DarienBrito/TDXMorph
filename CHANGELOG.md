@@ -9,12 +9,33 @@ toolkit version, because they now ship and update independently.
 
 ## [Open Toolkit 4.3.9] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.4.5**, PresetSnap **1.3.2**,
-ControlMapper **1.1.2**, PresetInspector **1.5.9**, JSONTree **1.5.8**, ListView **1.1.0**.
+Current component versions on this line: PresetManager **4.5.0**, PresetSnap **1.4.0**,
+ControlMapper **1.2.0**, PresetInspector **1.6.0**, JSONTree **1.6.0**, ListView **1.2.0**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
 
-### ListView 1.1.0
+### All six components
+
+- **A License page.** The About page reads Readme (the component's guide on darienbrito.com), Help (the tutorials playlist), Patreon, Website, YouTube and **License**, which opens the license in its own window. The window is built when you open it and removed when you close it, so nothing runs at rest.
+
+### PresetManager 4.5.0
+
+- **Presets keep expressions** (#209). A parameter driven by an expression stores the expression with its value. Set puts it back; a morph carries the parameter toward the expression's current value and hands it back to the expression at the end; a blend switches it by side. A parameter that already runs the stored expression is left alone, so stopping a morph never loses it.
+- **Exported parameters are never written** (Set, morph, blend, random). Bound parameters are written through as before.
+- Presets from earlier versions carry no expressions and leave a parameter that runs an expression alone.
+- **Fixed: storing failed** on a parameter whose expression had an error. The preset now keeps the expression and the last value.
+- **Fixed:** stopping a morph kept its pending end-of-morph values, which then landed at the end of a later morph.
+
+### PresetSnap 1.4.0
+
+- **Fixed: the parameter editor broke** on a parameter whose expression had an error. It shows the last value.
+
+### JSONTree 1.6.0, PresetInspector 1.6.0
+
+- **The Look page comes before About** (#215), as on the other components.
+- **Fixed: the tree stopped following its input** after the component, or any COMP above it, was renamed.
+
+### ListView 1.2.0
 
 - **A row can restyle its own cells.** Give it a `_style` dict keyed by column, with any of `text`, `color`,
   `bg`, `font`, `bold` and `help` (that cell's tooltip). A row without one looks as before.

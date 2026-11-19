@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.5.8
+**Version:** 1.6.0
 
 ---
 
@@ -74,6 +74,13 @@ Both set `Source` to `Data` for you.
 | `Schemaaware` | Toggle | `On` | Render TDXMorph parameter dicts as single rows. See below. |
 | `Showtoolbar` | Toggle | `On` | Show the in-panel toolbar. |
 
+### Look page
+
+| **Parameter** | **Type** | **Default** | **Description** |
+|---|---|---|---|
+| `Skin` | Menu | `Carbon` | Colour skin: `Carbon`, `Verdigris` or `Mono`. Repaints the tree and the toolbar. |
+| `Applyskin` | Pulse | | Re-apply the current skin. This is the way back after hand-editing a colour. |
+
 ### Callbacks page
 
 | **Parameter** | **Type** | **Description** |
@@ -82,14 +89,7 @@ Both set `Source` to `Data` for you.
 
 ### About page
 
-The `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
-
-### Look page
-
-| **Parameter** | **Type** | **Default** | **Description** |
-|---|---|---|---|
-| `Skin` | Menu | `Carbon` | Colour skin: `Carbon`, `Verdigris` or `Mono`. Repaints the tree and the toolbar. |
-| `Applyskin` | Pulse | | Re-apply the current skin. This is the way back after hand-editing a colour. |
+The `Readme` (this component's guide on darienbrito.com), `Help` (the tutorials playlist), `Support` (labelled Patreon), `Website`, `Youtube` (labelled YouTube) and `License` pulse buttons, then `Author` and `Version`, which are **read only**. `License` shows the component's license in its own window, built when you open it and removed when you close it.
 
 ---
 

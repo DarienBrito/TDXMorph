@@ -4,7 +4,7 @@
 Copyright (c) 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.1.2
+**Version:** 1.2.0
 
 ---
 
@@ -124,7 +124,7 @@ Both ranges normalise their protocol to 0..1 before anything downstream sees it,
 
 ### About page
 
-The `Readme`, `Help`, `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
+The `Readme` (this component's guide on darienbrito.com), `Help` (the tutorials playlist), `Support` (labelled Patreon), `Website`, `Youtube` (labelled YouTube) and `License` pulse buttons, then `Author` and `Version`, which are **read only**. `License` shows the component's license in its own window, built when you open it and removed when you close it.
 
 ---
 

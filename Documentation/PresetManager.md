@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 4.4.5
+**Version:** 4.5.0
 
 ---
 
@@ -29,6 +29,7 @@ Version 4 is a substantial rewrite of the morphing engine. If you are coming fro
 - **End modes.** Each track can hold, loop, ping-pong or advance when it reaches the end of its morph.
 - **Curve shapes.** Curves take three shape coefficients (`a`, `b`, `n`), stored per track and seeded from each curve's own defaults.
 - **Blending.** Two presets can be loaded into the engine and crossfaded manually with a single factor, independently of the timed morph.
+- **Presets keep expressions** (4.5.0). See [Expressions in presets](#expressions-in-presets).
 - **Owned Paths editor.** The paths list is now the MIT `ListView` widget rather than a palette Lister, so the component carries no third-party content.
 
 ### Removed since 3.2
@@ -150,6 +151,10 @@ op('PresetManager').MorphPreset('intro')
 
 `Currentlystored`, `Currentmorphcount`, `Currentpreset` and `Morphingtype` report engine state for display and for binding.
 
+### About page
+
+The `Readme` (this component's guide on darienbrito.com), `Help` (the tutorials playlist), `Support` (labelled Patreon), `Website`, `Youtube` (labelled YouTube) and `License` pulse buttons, then `Author` and `Version`, which are **read only**. `License` shows the component's license in its own window, built when you open it and removed when you close it.
+
 ---
 
 ## Stored properties
@@ -198,9 +203,24 @@ Each entry in `params` is a serialized `ParamState`:
  'normMin': 0.0, 'normMax': 1.0, 'min': 0.0, 'max': 10.0}
 ```
 
+A parameter driven by an **expression** also stores `'mode': 'expression'` and its `'expr'`, beside the value it had when stored; a constant one stores `'mode': 'constant'`. Bound and exported parameters store the value only. Older builds ignore both keys. See [Expressions in presets](#expressions-in-presets).
+
 `locked` is for display only. It records a ParameterMorpher element's own Lock at store time and is never read on recall: the live Lock decides what a preset may change.
 
 The four range keys are present only for a **full** capture (`StorePreset`). Transient *essential* captures, used for the start state of a morph, leave them out.
+
+### Expressions in presets
+
+A preset keeps the expressions it captured:
+
+- **Set** puts the stored expression back. A stored plain value replaces an expression the parameter has gained since: the preset wins.
+- **Morph** carries the parameter toward the expression's current value, then hands it back to the expression when the morph ends. A parameter that already runs the stored expression is left alone, so stopping a morph never loses it.
+- **Blend** switches an expression parameter by side, like a menu, instead of blending it.
+- A stored expression that does not evaluate where it is recalled sets the stored value instead, and the component says which parameters it could not restore. A parameter whose expression has an error still stores: the preset keeps the expression and the last value.
+- **Exported** parameters are never written (Set, morph, blend or random), since a write would cut them off their CHOP. **Bound** parameters are written through to their source, as before.
+- Presets stored before 4.5.0 carry no expressions, and leave a parameter that runs an expression alone.
+
+Importing a preset file brings its expressions with it, and they run when the preset is recalled: import files you trust.
 
 ### Which timing a recall uses
 

@@ -11,8 +11,7 @@
 > Presets written by older versions migrate automatically, but **back up your project and export your
 > presets before upgrading** from 3.2.1.
 >
-> TDXMorph 4 is a **public beta**. Every component has been through a full audit and a closed beta, but
-> bugs are still possible, so please [report](#support-and-feedback) anything you find.
+> TDXMorph 4 is out of beta. If you find a bug, please [report](#support-and-feedback) it.
 
 ## What it is
 
@@ -42,12 +41,12 @@ from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
 
 | Component | Version | What it is |
 |---|---|---|
-| [**PresetManager**](PresetManager/) | 4.4.5 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
-| [**PresetSnap**](PresetSnap/) | 1.3.2 | Plain store and recall for any COMP. No morphing, no setup. |
-| [**PresetInspector**](PresetInspector/) | 1.5.9 | Preset viewer and value editor. |
-| [**JSONTree**](JSONTree/) | 1.5.8 | Reusable JSON tree viewer with inline editing. |
-| [**ListView**](ListView/) | 1.1.0 | Reusable flat-columnar list widget. |
-| [**ControlMapper**](ControlMapper/) | 1.1.2 | MIDI and OSC mapping for any custom parameter. |
+| [**PresetManager**](PresetManager/) | 4.5.0 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
+| [**PresetSnap**](PresetSnap/) | 1.4.0 | Plain store and recall for any COMP. No morphing, no setup. |
+| [**PresetInspector**](PresetInspector/) | 1.6.0 | Preset viewer and value editor. |
+| [**JSONTree**](JSONTree/) | 1.6.0 | Reusable JSON tree viewer with inline editing. |
+| [**ListView**](ListView/) | 1.2.0 | Reusable flat-columnar list widget. |
+| [**ControlMapper**](ControlMapper/) | 1.2.0 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available through
 [Patreon](https://www.patreon.com/darienbrito). **ParameterTimeline**, a paid timeline for any parameter, is coming soon.
@@ -134,7 +133,7 @@ the maintenance, the free side and the learning resources.
 |---|---|
 | **The six components above** | [MIT](https://opensource.org/license/mit). Use them in personal and commercial projects, modify them freely, redistribute or sell derived works, combine them with closed-source software. You must include the copyright notice and the licence text, and accept that there is no warranty or liability. |
 | **The example project** | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Study it, change it and share it with credit, for non-commercial use. The components inside it keep their own MIT licence. |
-| **ParameterMorpher, SceneLauncher and ParameterTimeline** | Commercial. Licensed, not sold, each governed by its own EULA rather than by MIT: no redistribution, resale, sublicensing or sharing. The terms are in the `LICENSE` operator inside each component. |
+| **ParameterMorpher, SceneLauncher and ParameterTimeline** | Commercial. Licensed, not sold, each governed by its own EULA rather than by MIT. Use them in anything you make, client work included (credit appreciated, not required). Hand them over only inside a finished project: your client runs it there, with no reuse, sharing or resale. No sharing or resale of the components, alone or built into tools of your own. The terms are in each component, under About > License. |
 
 Unsure what MIT implies? [Here is a plain explanation](https://memgraph.com/blog/what-is-mit-license).
 

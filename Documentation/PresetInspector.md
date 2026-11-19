@@ -4,7 +4,7 @@
 Copyright © 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.5.9
+**Version:** 1.6.0
 
 ---
 
@@ -67,16 +67,16 @@ The tree fills with the stored presets. Double-click a value to edit it.
 | `Expandall` | Pulse | | Expand every branch. |
 | `Collapseall` | Pulse | | Collapse every branch. |
 
-### About page
-
-The `Readme`, `Help`, `Support` (labelled Patreon) and `Website` pulse buttons, then `Author` and `Version`, which are **read only**.
-
 ### Look page
 
 | **Parameter** | **Type** | **Default** | **Description** |
 |---|---|---|---|
 | `Skin` | Menu | `Carbon` | Colour skin: `Carbon`, `Verdigris` or `Mono`. Handed down to the embedded tree, which owns the colours. |
 | `Applyskin` | Pulse | | Re-apply the current skin. |
+
+### About page
+
+The `Readme` (this component's guide on darienbrito.com), `Help` (the tutorials playlist), `Support` (labelled Patreon), `Website`, `Youtube` (labelled YouTube) and `License` pulse buttons, then `Author` and `Version`, which are **read only**. `License` shows the component's license in its own window, built when you open it and removed when you close it.
 
 ---
 

@@ -10,8 +10,10 @@ Copyright © 2026
 > and may change before release.
 
 > ParameterTimeline is a **commercial** component of the TDXMorph toolkit, governed by the
-> ParameterTimeline EULA (see the `LICENSE` operator inside the component). No redistribution,
-> resale, sublicensing or sharing. No warranty.
+> ParameterTimeline EULA (see the `LICENSE` operator inside the component, or About > License).
+> Use it in anything you make, client work included; credit appreciated, not required. Hand it over
+> only inside a finished project: your client runs it there, with no reuse, sharing or resale.
+> No sharing or resale of the component, alone or built into tools of your own. No warranty.
 >
 > It is **not** MIT licensed and is not distributed from this repository. It is available
 > through [Patreon](https://www.patreon.com/darienbrito). This page is reference
