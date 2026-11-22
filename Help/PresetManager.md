@@ -3,7 +3,7 @@
 The heart of TDXMorph. This class stores and retrieves presets, and drives the morpher and
 random distribution nodes.
 
-Version 4.5.0. Capitalized methods are promoted and are the supported API. Lowercase
+Version 4.6.0. Capitalized methods are promoted and are the supported API. Lowercase
 methods are internal and may change between versions.
 
 For the full reference, including the preset schema, the multi-track engine and the
@@ -268,11 +268,6 @@ Grabs the source value based on certain conditions. Some parameters, such as men
 getParams(targetOp, data)
 ```
 Returns the filtered parameter objects for the target, per the selection.
-
-```python
-inject(preset, oldPath, newPath)
-```
-Re-key a preset's stored state from one path to another.
 
 ```python
 normalizePathsData(paths)

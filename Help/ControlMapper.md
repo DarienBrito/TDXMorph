@@ -3,7 +3,7 @@
 The MIDI/OSC mapping service. One instance sits inside ParameterMorpher and SceneLauncher and
 serves both protocols from a single list of mappings.
 
-Class: `extControlMapper`. Version 1.2.0.
+Class: `extControlMapper`. Version 1.3.0.
 
 > **MIT licensed.** It ships from this repository as a standalone component, and also
 > travels embedded inside the commercial ParameterMorpher and SceneLauncher, which are
@@ -107,6 +107,12 @@ many targets were written. A driven parameter is skipped, never overwritten.
 Recompile()
 ```
 Force a rebuild of the routing dictionary. The editor calls this after a table edit.
+
+```python
+OnOscMessage(address, args)
+```
+Learn or route one message from the OSC In DAT set in `Oscdat`, repeats included. Called by the component's own
+listener; channel names and values match the OSC In CHOP's. Returns how many targets were written.
 
 ## Editing mappings
 

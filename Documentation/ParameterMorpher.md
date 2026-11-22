@@ -4,7 +4,7 @@
 Copyright © 2020–2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** **PROPRIETARY. Licensed, not sold.**  
-**Version:** 4.19.0
+**Version:** 4.20.0
 
 > ParameterMorpher is a **commercial** component of the TDXMorph toolkit, governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component, or About > License).
@@ -20,6 +20,17 @@ Copyright © 2020–2026
 > keep their own MIT licence.
 
 ---
+
+## 4.20.0
+
+- **OSC DAT input.** Point **OSC DAT** (Inputs page) at an OSC In DAT and every message counts, so a button or trigger that only
+  ever sends 1 fires on every press. The OSC In CHOP keeps one value per address, so a repeated value never
+  re-triggered. While it is set, OSC arriving through the OSC input is ignored, and the **Map** icon shows for it.
+  Use it for buttons and triggers; a sender that streams an unchanged fader value rewrites its parameter on every
+  message, so keep those on the OSC input or use pickup takeover.
+- **Engine updates from PresetManager 4.6.0**: triggering one element leaves the others' running morphs alone; an
+  element on the global curve uses its shape; a morph ends exactly on the stored value; a morph started as another
+  finishes is no longer cut short; reopening a project saved mid-morph leaves the engine stopped.
 
 ## 4.19.0
 

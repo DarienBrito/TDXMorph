@@ -3,7 +3,7 @@
 The root of the ParameterMorpher component. Manages the internal library and the tools built
 from it.
 
-Class: `extParameterMorpher`. Version 4.19.0.
+Class: `extParameterMorpher`. Version 4.20.0.
 
 > **PROPRIETARY. Licensed, not sold.** A commercial component governed by the
 > ParameterMorpher EULA (see the `LICENSE` operator inside the component). Available through
@@ -89,7 +89,7 @@ Changes the layout from vertical to horizontal. Only useful when there is more t
 | Page | Parameters |
 |---|---|
 | Dimensions | `Width`, `Height`, `Horizontal` |
-| Inputs | `Midi`, `Osc`, `Transport` (CHOP references) |
+| Inputs | `Midi`, `Osc`, `Transport` (CHOP references), `Oscdat` (an OSC In DAT) |
 | Mappings | `Managemappings`, `Clearmappings` (both protocols share one list since 4.5.0) |
 | Info | `Containers` (read only) |
 | About | The `Readme`, `Help`, `Support` (labelled Patreon), `Website`, `Youtube` (labelled YouTube) and `License` pulses, then `Author` and `Version`, which are read only |

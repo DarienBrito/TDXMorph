@@ -7,12 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Since version 4, the free components carry their own version numbers rather than a single
 toolkit version, because they now ship and update independently.
 
-## [Open Toolkit 4.3.9] (4th quarter of 2026)
+## [Open Toolkit 4.3.10] (4th quarter of 2026)
 
-Current component versions on this line: PresetManager **4.5.0**, PresetSnap **1.4.0**,
-ControlMapper **1.2.0**, PresetInspector **1.6.0**, JSONTree **1.6.0**, ListView **1.2.0**.
+Current component versions on this line: PresetManager **4.6.0**, PresetSnap **1.4.0**,
+ControlMapper **1.3.0**, PresetInspector **1.6.0**, JSONTree **1.6.0**, ListView **1.2.0**.
 This list tracks what the line ships today, so it moves with every component release
 rather than recording what any one toolkit release contained.
+
+### ControlMapper 1.3.0
+
+- **OSC In DAT input** (`Oscdat`, Settings page). An OSC In CHOP keeps one value per address, so a button or trigger that only ever sends 1 fired once and never again. Point `Oscdat` at an OSC In DAT and every message counts, bundles included. Channel names and values match the CHOP's, so existing mappings keep working, and learning takes the value that moved (moving only Y on an XY pad learns `xy2`). While it is set, OSC arriving through `Osc` is ignored.
+- Use it for buttons and triggers. A sender that streams an unchanged fader value rewrites its parameter on every message, so keep those on `Osc`, or give the mapping pickup takeover.
+
+### PresetManager 4.6.0
+
+- **Multitrack: triggering one track leaves the running tracks alone** (their time, curve, shape, end mode, mute and group). After Stop, or once a morph has finished, triggering some tracks no longer resumes the others.
+- Tracks on the global curve use its shape. With Ease In, Ease Out or Exponential easing they jumped to the target on the first frame.
+- **Expressions and exports on the component's own parameters stay** when you change Morph Time, Morph Curve, Random Distribution, Auto Mode, Blend Active or the blend knob.
+- Manual blend survives a project reload; turning Blend Active off no longer moves the parameters.
+- **A morph ends exactly on the stored value** (it ended at 0.12346 for a stored 0.123456). A morph started in the frame another finishes is no longer cut short. Reopening a project saved during a morph leaves the engine stopped instead of frozen mid-morph.
+- Random targets keep full precision; Uniform random on an Int gives every integer an equal chance. Per-track random works on plain operators. `PresetsSequence(sortKeys=True)` stays sorted on every step.
+- Paths: renaming tracked nodes into each other's old names (a chain or a swap) keeps each node's settings and preset values.
+- Overwrite with no stored preset targeted says so instead of creating one. The Filter cell's help describes what it matches.
+- Removed `inject(preset, oldPath, newPath)`: Paths re-keys renamed nodes in one pass.
+
+## [Open Toolkit 4.3.9] (4th quarter of 2026)
 
 ### All six components
 

@@ -65,12 +65,12 @@ These components are **free and MIT licensed**. Get all six plus the example pro
 
 | Component | Version | What it is |
 |---|---|---|
-| [**PresetManager**](PresetManager/) | 4.5.0 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
+| [**PresetManager**](PresetManager/) | 4.6.0 | Preset storage plus the multi-track morphing engine. The core of TDXMorph. |
 | [**PresetSnap**](PresetSnap/) | 1.4.0 | Plain store and recall for any COMP. No morphing, no setup. |
 | [**PresetInspector**](PresetInspector/) | 1.6.0 | Preset viewer and value editor. |
 | [**JSONTree**](JSONTree/) | 1.6.0 | Reusable JSON tree viewer with inline editing. |
 | [**ListView**](ListView/) | 1.2.0 | Reusable flat-columnar list widget. |
-| [**ControlMapper**](ControlMapper/) | 1.2.0 | MIDI and OSC mapping for any custom parameter. |
+| [**ControlMapper**](ControlMapper/) | 1.3.0 | MIDI and OSC mapping for any custom parameter. |
 
 **ParameterMorpher** and **SceneLauncher** are paid components, available on Patreon on their own
 ([ParameterMorpher](https://www.patreon.com/darienbrito/posts/parametermorpher-175898208),

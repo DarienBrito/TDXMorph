@@ -4,7 +4,7 @@
 Copyright (c) 2026  
 **Author:** [Darien Brito](https://www.darienbrito.com)  
 **License:** [MIT License](https://opensource.org/license/mit)  
-**Version:** 1.2.0
+**Version:** 1.3.0
 
 ---
 
@@ -88,10 +88,19 @@ mapper.SetMapMode(False)
 | `Osc` | CHOP | `''` | The OSC input CHOP. |
 | `Oscfromrange1` | Float | `0.0` | Low end of the incoming OSC range. |
 | `Oscfromrange2` | Float | `1.0` | High end of the incoming OSC range. |
+| `Oscdat` | DAT | `''` | An OSC In DAT. When set, every OSC message is learned or routed, repeats included, and OSC arriving through `Osc` is ignored. |
 | `Maproot` | OP | `''` | The root targets are keyed against. Left empty it falls back to the component's own parent, which is what an embedded instance wants. |
 | `Targettag` | Str | `mapTarget` | The tag `ScanTargets` looks for. |
 
 Both ranges normalise their protocol to 0..1 before anything downstream sees it, which is why one routing path serves both.
+
+**OSC In or OSC In DAT.** An OSC In CHOP keeps one value per address, so a sender that only ever sends `1` (a button,
+a trigger) fires once and never again. Point `Oscdat` at an OSC In DAT instead and every message counts. ControlMapper
+listens on the same port as that DAT, splits bundles into messages, and names channels the way the CHOP does (the address
+without its leading `/`; `/xy` with two values becomes `xy1` and `xy2`), so mappings learned through either input keep
+working. Learning takes the value that moved, so moving only Y on an XY pad learns `xy2`. Use it for buttons and
+triggers: a sender that streams an unchanged fader value rewrites its parameter on every message, so keep those on
+`Osc`, or give the mapping pickup takeover.
 
 ### Controls page
 
