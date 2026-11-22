@@ -19,7 +19,7 @@ The six free components and the example project. These links always point to the
 
 <br>
 
-### **[ParameterMorpher, SceneLauncher and the full example on Patreon](https://www.patreon.com/darienbrito)**
+### **[ParameterMorpher, SceneLauncher and the full example on Patreon](https://www.patreon.com/darienbrito/posts/tdxmorph-bundle-175874327)**
 
 [![Support on Patreon](https://img.shields.io/badge/Support_on_Patreon-patreon.com/darienbrito-E8A317?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/darienbrito)
 
@@ -72,8 +72,10 @@ These components are **free and MIT licensed**. Get all six plus the example pro
 | [**ListView**](ListView/) | 1.2.0 | Reusable flat-columnar list widget. |
 | [**ControlMapper**](ControlMapper/) | 1.2.0 | MIDI and OSC mapping for any custom parameter. |
 
-**ParameterMorpher** and **SceneLauncher** are paid components, available through
-[Patreon](https://www.patreon.com/darienbrito). **ParameterTimeline**, a paid timeline for any parameter, is coming soon.
+**ParameterMorpher** and **SceneLauncher** are paid components, available on Patreon on their own
+([ParameterMorpher](https://www.patreon.com/darienbrito/posts/parametermorpher-175898208),
+[SceneLauncher](https://www.patreon.com/darienbrito/posts/scenelauncher-as-175898636)) or together in the
+[TDXMorph bundle](https://www.patreon.com/darienbrito/posts/tdxmorph-bundle-175874327). **ParameterTimeline**, a paid timeline for any parameter, is coming soon.
 
 ## Example project
 
@@ -87,8 +89,9 @@ step-by-step tour, or Esc to explore the network, where every part is annotated.
 The example is licensed differently from the components, see [License](#license).
 
 The **full example** is the extended, complete version. It adds the paid components, with SceneLauncher
-playing the set as scenes and ParameterMorpher morphing the look, and is available on
-[Patreon](https://www.patreon.com/darienbrito) for patrons on the Tools tier and above.
+playing the set as scenes and ParameterMorpher morphing the look. It comes with the
+[TDXMorph bundle](https://www.patreon.com/darienbrito/posts/tdxmorph-bundle-175874327) and is available to
+[patrons](https://www.patreon.com/darienbrito) on the Tools tier and above.
 
 ## Install
 
