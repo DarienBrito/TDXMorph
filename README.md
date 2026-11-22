@@ -2,6 +2,29 @@
 
 *Formerly TDMorph. The project was renamed in August 2026, and links to the old address redirect here.*
 
+<div align="center">
+
+### **[Guides & Reference](https://darienbrito.com/tdxmorph/)**
+
+[![Guide](https://img.shields.io/badge/📖_Guide-darienbrito.com/tdxmorph-E3A23F?style=for-the-badge)](https://darienbrito.com/tdxmorph/)
+
+<br>
+
+### **[Download the free components](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorph-OpenToolkit.zip)**
+
+[![Download the Open Toolkit](https://img.shields.io/badge/⬇_Download_all-TDXMorph--OpenToolkit.zip-2ea043?style=for-the-badge)](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorph-OpenToolkit.zip)
+[![Download the example project](https://img.shields.io/badge/⬇_Example_project-TDXMorphOpenExample.toe-0078d4?style=for-the-badge)](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorphOpenExample.toe)
+
+The six free components and the example project. These links always point to the latest release.
+
+<br>
+
+### **[ParameterMorpher, SceneLauncher and the full example on Patreon](https://www.patreon.com/darienbrito)**
+
+[![Support on Patreon](https://img.shields.io/badge/Support_on_Patreon-patreon.com/darienbrito-E8A317?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/darienbrito)
+
+</div>
+
 > ### Version 4
 >
 > Version 4 is a major release comprised of various tools. Each component carries its own version and
@@ -36,8 +59,9 @@ through each one.
 
 ## Download
 
-These components are **free and MIT licensed**. Take the folder from this repository, or the build
-from [Releases](https://github.com/DarienBrito/TDXMorph/releases).
+These components are **free and MIT licensed**. Get all six plus the example project in
+[one zip](https://github.com/DarienBrito/TDXMorph/releases/latest/download/TDXMorph-OpenToolkit.zip), single files from
+[Releases](https://github.com/DarienBrito/TDXMorph/releases), or the folder from this repository.
 
 | Component | Version | What it is |
 |---|---|---|
