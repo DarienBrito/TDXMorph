@@ -94,13 +94,16 @@ mapper.SetMapMode(False)
 
 Both ranges normalise their protocol to 0..1 before anything downstream sees it, which is why one routing path serves both.
 
-**OSC In or OSC In DAT.** An OSC In CHOP keeps one value per address, so a sender that only ever sends `1` (a button,
-a trigger) fires once and never again. Point `Oscdat` at an OSC In DAT instead and every message counts. ControlMapper
-listens on the same port as that DAT, splits bundles into messages, and names channels the way the CHOP does (the address
-without its leading `/`; `/xy` with two values becomes `xy1` and `xy2`), so mappings learned through either input keep
-working. Learning takes the value that moved, so moving only Y on an XY pad learns `xy2`. Use it for buttons and
-triggers: a sender that streams an unchanged fader value rewrites its parameter on every message, so keep those on
-`Osc`, or give the mapping pickup takeover.
+**OSC In or OSC In DAT.** An OSC In CHOP keeps one value per address and only reacts when it changes. Point `Oscdat`
+at an OSC In DAT instead and every message is routed as it arrives, repeats included, so a value a preset recall or a
+morph changed in between is written again by the next message. ControlMapper listens on the same port as that DAT,
+splits bundles into messages, and names channels the way the CHOP does (the address without its leading `/`; `/xy` with
+two values becomes `xy1` and `xy2`), so mappings learned through either input keep working. Learning takes the value
+that moved, so moving only Y on an XY pad learns `xy2`.
+
+A button still needs a press and a release (1, then 0) to fire again, through either input: writing the value a
+parameter already holds changes nothing. A sender that streams an unchanged fader value rewrites its parameter on every
+message, so give those mappings pickup takeover.
 
 ### Controls page
 

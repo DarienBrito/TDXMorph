@@ -20,11 +20,13 @@ Copyright © 2020–2026
 
 ## 4.13.0
 
-- **OSC DAT input.** Point **OSC DAT** (Config page) at an OSC In DAT and every message counts, so a button or trigger that only
-  ever sends 1 fires on every press. The OSC In CHOP keeps one value per address, so a repeated value never
-  re-triggered. While it is set, OSC arriving through the OSC input is ignored, and the **Map** icon shows for it.
-  Use it for buttons and triggers; a sender that streams an unchanged fader value rewrites its parameter on every
-  message, so keep those on the OSC input or use pickup takeover.
+- **OSC DAT input.** Point **OSC DAT** (Config page) at an OSC In DAT and every OSC message is routed as it
+  arrives, repeats included, bundles split into messages. A value a preset recall or a morph changed in between is
+  written again by the next message, where the OSC In CHOP only reacts to a change. While it is set, OSC arriving
+  through the OSC input is ignored, and the **Map** icon shows for it.
+  A button still needs a press and a release (1, then 0) to fire again: writing the value a parameter already holds
+  changes nothing. A sender that streams an unchanged fader value rewrites its parameter on every message, so give
+  those mappings pickup takeover.
 - With PresetManager 4.6.0 attached, its engine updates apply (see its changelog).
 
 ## 4.12.0
@@ -406,7 +408,7 @@ Length plus its Delay.
 ### 6. Where to go next
 
 The `Osc` and `Midi` parameters on the **Config** page take CHOP references, and `Oscdat` an OSC In DAT (every
-message counts, for buttons that repeat a value). Wire any one
+message is routed as it arrives). Wire any one
 and the **Map** header icon appears, six icons instead of the five it ships with, giving you
 auto-learn mapping for the transport controls.
 

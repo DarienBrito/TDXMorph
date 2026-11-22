@@ -16,8 +16,8 @@ rather than recording what any one toolkit release contained.
 
 ### ControlMapper 1.3.0
 
-- **OSC In DAT input** (`Oscdat`, Settings page). An OSC In CHOP keeps one value per address, so a button or trigger that only ever sends 1 fired once and never again. Point `Oscdat` at an OSC In DAT and every message counts, bundles included. Channel names and values match the CHOP's, so existing mappings keep working, and learning takes the value that moved (moving only Y on an XY pad learns `xy2`). While it is set, OSC arriving through `Osc` is ignored.
-- Use it for buttons and triggers. A sender that streams an unchanged fader value rewrites its parameter on every message, so keep those on `Osc`, or give the mapping pickup takeover.
+- **OSC In DAT input** (`Oscdat`, Settings page). An OSC In CHOP keeps one value per address and only reacts when it changes. Point `Oscdat` at an OSC In DAT and every message is routed as it arrives, repeats included, bundles split into messages, so a value a preset recall or a morph changed in between is written again by the next message. Channel names and values match the CHOP's, so existing mappings keep working, and learning takes the value that moved (moving only Y on an XY pad learns `xy2`). While it is set, OSC arriving through `Osc` is ignored.
+- A button still needs a press and a release (1, then 0) to fire again: writing the value a parameter already holds changes nothing. A sender that streams an unchanged fader value rewrites its parameter on every message, so give those mappings pickup takeover.
 
 ### PresetManager 4.6.0
 
